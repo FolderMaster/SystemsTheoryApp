@@ -6,7 +6,9 @@ namespace ClassificationApp.Models.Schedules
 {
     public class Schedule3D : ISchedule
     {
-        private Axis[] _axises = new Axis[3];
+        private const int count = 3;
+
+        private Axis[] _axises = new Axis[count];
 
         public List<Axis> Axises
         {
@@ -18,7 +20,7 @@ namespace ClassificationApp.Models.Schedules
             get => _axises.ToList();
             set
             {
-                if(value.Count != 3)
+                if(value.Count != count)
                 {
                     throw new ArgumentException();
                 }

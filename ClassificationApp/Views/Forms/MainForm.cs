@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ClassificationApp.Services;
+using ClassificationApp.Services.IO;
+using ClassificationApp.Services.App;
+using ClassificationApp.Services.Classification;
+using ClassificationApp.Views.Controls;
 
 namespace ClassificationApp.Views.Forms
 {
@@ -37,7 +40,8 @@ namespace ClassificationApp.Views.Forms
             finally
             {
                 _session = save == null ? _session : save.Session;
-                DataGridControl.Countries = _session.Education;
+                EductaionCountryGridControl.Countries = _session.Education;
+                TestCountryGridControl.Countries = _session.Test;
             }
         }
 
@@ -52,6 +56,22 @@ namespace ClassificationApp.Views.Forms
             {
                 MessageBoxManager.ShowError(ex.Message);
             }
+        }
+
+        private void ClassifierControl_ButtonClicked(object sender, EventArgs e)
+        {
+            IClassifier classifier = null;
+            switch(ClassifierControl.ClassifierType)
+            {
+                case ClassifierType.LinearClassifier: classifier = new LinearClassifier(); break;
+                case ClassifierType.NeighborClassifier: classifier = new
+                        NeighborClassifier(ClassifierControl.NeighborsCount); break;
+                default: throw new ArgumentException();
+            }
+            classifier.Educate(EductaionCountryGridControl.Countries);
+            ResultForm form = new ResultForm();
+            form.Countries = classifier.Classify(TestCountryGridControl.Countries);
+            form.ShowDialog();
         }
     }
 }

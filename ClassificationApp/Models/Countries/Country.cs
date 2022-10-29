@@ -1,4 +1,4 @@
-﻿namespace ClassificationApp.Models
+﻿namespace ClassificationApp.Models.Countries
 {
     public class Country
     {
@@ -22,11 +22,12 @@
             Density = density;
         }
 
-        public enum CountryType
+        public Country(Country country)
         {
-            None,
-            Developing,
-            Developed
+            Type = country.Type;
+            Gdp = country.Gdp;
+            Debt = country.Debt;
+            Density = country.Density;
         }
     }
 }

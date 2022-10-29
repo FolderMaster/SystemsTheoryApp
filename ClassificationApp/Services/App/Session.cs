@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using ClassificationApp.Models;
+using ClassificationApp.Models.Countries;
 
-namespace ClassificationApp.Services
+namespace ClassificationApp.Services.App
 {
     public class Session
     {

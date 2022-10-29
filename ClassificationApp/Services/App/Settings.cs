@@ -1,4 +1,4 @@
-﻿namespace ClassificationApp.Services
+﻿namespace ClassificationApp.Services.App
 {
     public class Settings
     {

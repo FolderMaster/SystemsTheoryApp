@@ -49,27 +49,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Countries\Country.cs" />
+    <Compile Include="Models\Countries\CountryType.cs" />
     <Compile Include="Models\Schedules\Axis.cs" />
     <Compile Include="Models\Schedules\Camera3D.cs" />
     <Compile Include="Models\Schedules\ICamera.cs" />
     <Compile Include="Models\Schedules\IScale.cs" />
+    <Compile Include="Models\Schedules\IScene.cs" />
     <Compile Include="Models\Schedules\ISchedule.cs" />
     <Compile Include="Models\Schedules\IShape.cs" />
-    <Compile Include="Models\Schedules\Line.cs" />
     <Compile Include="Models\Schedules\LinearScale.cs" />
     <Compile Include="Models\Schedules\LineSegment.cs" />
     <Compile Include="Models\Schedules\LogScale.cs" />
+    <Compile Include="Models\Schedules\Plane.cs" />
     <Compile Include="Models\Schedules\Point.cs" />
-    <Compile Include="Models\Schedules\PolygonalChain.cs" />
-    <Compile Include="Models\Schedules\CommonSchedule.cs" />
-    <Compile Include="Models\Schedules\Ray.cs" />
+    <Compile Include="Models\Schedules\Vector.cs" />
+    <Compile Include="Models\Schedules\Scene3D.cs" />
     <Compile Include="Models\Schedules\Schedule3D.cs" />
-    <Compile Include="Services\Session.cs" />
-    <Compile Include="Services\JsonManager.cs" />
-    <Compile Include="Services\SaveFormat.cs" />
-    <Compile Include="Services\Settings.cs" />
+    <Compile Include="Services\App\Session.cs" />
+    <Compile Include="Services\Classification\IClassifier.cs" />
+    <Compile Include="Services\Classification\LinearClassifier.cs" />
+    <Compile Include="Services\Classification\NeighborClassifier.cs" />
+    <Compile Include="Services\Factories\ShapeFactory.cs" />
+    <Compile Include="Services\IO\JsonManager.cs" />
+    <Compile Include="Services\App\SaveFormat.cs" />
+    <Compile Include="Services\App\Settings.cs" />
     <Compile Include="Views\ColorManager.cs" />
+    <Compile Include="Views\Controls\ClassifierControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\ClassifierControl.Designer.cs">
+      <DependentUpon>ClassifierControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\CountryGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -82,6 +93,7 @@
     <Compile Include="Views\Controls\Schedule3DControl.Designer.cs">
       <DependentUpon>Schedule3DControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\ClassifierType.cs" />
     <Compile Include="Views\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +102,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Forms\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageBoxManager.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +118,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Controls\ClassifierControl.resx">
+      <DependentUpon>ClassifierControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Controls\CountryGridControl.resx">
       <DependentUpon>CountryGridControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

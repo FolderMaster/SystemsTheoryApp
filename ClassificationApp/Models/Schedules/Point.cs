@@ -6,10 +6,28 @@ namespace ClassificationApp.Models.Schedules
 {
     public class Point : IShape, IComparable
     {
+        public object Tag { get; set; } = null;
+
         public List<double> Coordinates { get; set; } = new List<double>();
 
         public Point()
         {
+        }
+
+        public Point(object tag)
+        {
+            Tag = tag;
+        }
+
+        public Point(IEnumerable<double> coordinates)
+        {
+            Coordinates = coordinates.ToList();
+        }
+
+        public Point(object tag, IEnumerable<double> coordinates)
+        {
+            Tag = tag;
+            Coordinates = coordinates.ToList();
         }
 
         public double GetDistance(Point point, ISchedule schedule)
@@ -27,9 +45,17 @@ namespace ClassificationApp.Models.Schedules
             return Math.Sqrt(result);
         }
 
-        public Point(IEnumerable<double> coordinates)
+        public double GetDistance(Point point)
         {
-            Coordinates = coordinates.ToList();
+            double result = 0;
+            for (int n = 0; n < point.Coordinates.Count && n < Coordinates.Count; ++n)
+            {
+                double coordinate1 = Coordinates[n];
+                double coordinate2 = point.Coordinates[n];
+
+                result += Math.Pow(coordinate2 - coordinate1, 2);
+            }
+            return Math.Sqrt(result);
         }
 
         public IShape Display(ISchedule schedule)
@@ -46,7 +72,7 @@ namespace ClassificationApp.Models.Schedules
                     coordinates.Add(schedule.DefaultValue);
                 }
             }
-            return new Point(coordinates);
+            return new Point(Tag, coordinates);
         }
 
         public double GetMax(ISchedule schedule, int axisIndex)
@@ -61,7 +87,7 @@ namespace ClassificationApp.Models.Schedules
 
         public override string ToString()
         {
-            return string.Join(";", Coordinates);
+            return string.Join(";", Coordinates) + $" ({Tag})";
         }
 
         public int CompareTo(object obj)

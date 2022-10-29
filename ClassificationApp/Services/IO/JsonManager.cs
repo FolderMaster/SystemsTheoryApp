@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace ClassificationApp.Services
+namespace ClassificationApp.Services.IO
 {
     /// <summary>
     /// Предоставляет методы Json-сериализации и десериализации данных в файл.
