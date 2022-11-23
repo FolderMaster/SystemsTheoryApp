@@ -42,7 +42,7 @@
             this.ComboBox.Location = new System.Drawing.Point(138, 2);
             this.ComboBox.Name = "ComboBox";
             this.ComboBox.Size = new System.Drawing.Size(121, 21);
-            this.ComboBox.TabIndex = 0;
+            this.ComboBox.TabIndex = 3;
             this.ComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // ClassifyButton
@@ -70,7 +70,7 @@
             this.NeighborsCountLabel.Location = new System.Drawing.Point(265, 5);
             this.NeighborsCountLabel.Name = "NeighborsCountLabel";
             this.NeighborsCountLabel.Size = new System.Drawing.Size(86, 13);
-            this.NeighborsCountLabel.TabIndex = 3;
+            this.NeighborsCountLabel.TabIndex = 4;
             this.NeighborsCountLabel.Text = "NeighborsCount:";
             this.NeighborsCountLabel.Visible = false;
             // 
@@ -89,7 +89,7 @@
             0});
             this.NeighborsCountNumericUpDown.Name = "NeighborsCountNumericUpDown";
             this.NeighborsCountNumericUpDown.Size = new System.Drawing.Size(33, 20);
-            this.NeighborsCountNumericUpDown.TabIndex = 4;
+            this.NeighborsCountNumericUpDown.TabIndex = 5;
             this.NeighborsCountNumericUpDown.Value = new decimal(new int[] {
             1,
             0,

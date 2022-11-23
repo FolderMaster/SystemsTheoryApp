@@ -5,36 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ClassificationApp.Models.Countries;
-using ClassificationApp.Models.Schedules;
+using ClassificationApp.Models.Scenes;
 using ClassificationApp.Services.Factories;
 
 namespace ClassificationApp.Services.Classification
 {
     public class LinearClassifier : IClassifier
     {
-        private bool _isEducated = false;
+        public bool IsEducated { get; private set; } = false;
 
-        private Vector _vector = null;
+        public Vector PlaneVector { get; private set; } = null;
 
-        private Point _point = null;
+        public Point PlanePoint { get; private set; } = null;
 
-        public bool IsEducated
-        {
-            get => _isEducated;
-            private set => _isEducated = value;
-        }
+        public Point DevelopedMiddlePoint { get; private set; } = null;
 
-        public Vector Vector
-        {
-            get => _vector;
-            private set => _vector = value;
-        }
+        public Point DevelopingMiddlePoint { get; private set; } = null;
 
-        public Point Point
-        {
-            get => _point;
-            private set => _point = value;
-        }
+        public List<Point> EduccationPoints { get; private set; } = new List<Point>();
+
+        public List<Point> ResultPoints { get; private set; } = new List<Point>();
 
         public LinearClassifier()
         {
@@ -56,14 +46,18 @@ namespace ClassificationApp.Services.Classification
                 }
             }
 
-            Point developedMiddlePoint = ShapeFactory.CreateMiddlePointByPoints(developedPoints);
+            EduccationPoints.AddRange(developedPoints);
+            EduccationPoints.AddRange(developingPoints);
 
-            Point developingMiddlePoint = ShapeFactory.CreateMiddlePointByPoints(developingPoints);
+            DevelopedMiddlePoint = ShapeFactory.CreateMiddlePointByPoints(developedPoints);
 
-            Point = ShapeFactory.CreateMiddlePointByPoints(new List<Point>()
-            { developedMiddlePoint, developingMiddlePoint });
+            DevelopingMiddlePoint = ShapeFactory.CreateMiddlePointByPoints(developingPoints);
 
-            Vector = ShapeFactory.CreateVectorByPoints(developedMiddlePoint, developingMiddlePoint);
+            PlanePoint = ShapeFactory.CreateMiddlePointByPoints(new List<Point>()
+            { DevelopedMiddlePoint, DevelopingMiddlePoint });
+
+            PlaneVector = ShapeFactory.CreateVectorByPoints(DevelopedMiddlePoint,
+                DevelopingMiddlePoint);
 
             IsEducated = true;
         }
@@ -80,9 +74,9 @@ namespace ClassificationApp.Services.Classification
                 foreach (Country country in list)
                 {
                     Point point = ShapeFactory.CreatePointByCountry(country);
-                    Vector vector = ShapeFactory.CreateVectorByPoints(Point, point);
+                    Vector vector = ShapeFactory.CreateVectorByPoints(PlanePoint, point);
 
-                    double character = Vector.CharacterOfAngleBetweenVectors(Vector, vector);
+                    double character = Vector.CharacterOfAngleBetweenVectors(PlaneVector, vector);
                     Country newCountry = new Country(country);
                     if(character > 0)
                     {
@@ -97,6 +91,7 @@ namespace ClassificationApp.Services.Classification
                         newCountry.Type = CountryType.None;
                     }
                     result.Add(newCountry);
+                    ResultPoints.Add(ShapeFactory.CreatePointByCountry(newCountry));
                 }
                 return result;
             }

@@ -51,25 +51,26 @@
   <ItemGroup>
     <Compile Include="Models\Countries\Country.cs" />
     <Compile Include="Models\Countries\CountryType.cs" />
-    <Compile Include="Models\Schedules\Axis.cs" />
-    <Compile Include="Models\Schedules\Camera3D.cs" />
-    <Compile Include="Models\Schedules\ICamera.cs" />
-    <Compile Include="Models\Schedules\IScale.cs" />
-    <Compile Include="Models\Schedules\IScene.cs" />
-    <Compile Include="Models\Schedules\ISchedule.cs" />
-    <Compile Include="Models\Schedules\IShape.cs" />
-    <Compile Include="Models\Schedules\LinearScale.cs" />
-    <Compile Include="Models\Schedules\LineSegment.cs" />
-    <Compile Include="Models\Schedules\LogScale.cs" />
-    <Compile Include="Models\Schedules\Plane.cs" />
-    <Compile Include="Models\Schedules\Point.cs" />
-    <Compile Include="Models\Schedules\Vector.cs" />
-    <Compile Include="Models\Schedules\Scene3D.cs" />
-    <Compile Include="Models\Schedules\Schedule3D.cs" />
+    <Compile Include="Models\Scenes\Axis.cs" />
+    <Compile Include="Models\Scenes\Camera3D.cs" />
+    <Compile Include="Models\Scenes\ICamera.cs" />
+    <Compile Include="Models\Scenes\IScale.cs" />
+    <Compile Include="Models\Scenes\IScene.cs" />
+    <Compile Include="Models\Scenes\IGraph.cs" />
+    <Compile Include="Models\Scenes\IShape.cs" />
+    <Compile Include="Models\Scenes\LinearScale.cs" />
+    <Compile Include="Models\Scenes\LineSegment.cs" />
+    <Compile Include="Models\Scenes\LogScale.cs" />
+    <Compile Include="Models\Scenes\Plane.cs" />
+    <Compile Include="Models\Scenes\Point.cs" />
+    <Compile Include="Models\Scenes\Vector.cs" />
+    <Compile Include="Models\Scenes\Scene3D.cs" />
+    <Compile Include="Models\Scenes\Graph3D.cs" />
     <Compile Include="Services\App\Session.cs" />
     <Compile Include="Services\Classification\IClassifier.cs" />
     <Compile Include="Services\Classification\LinearClassifier.cs" />
     <Compile Include="Services\Classification\NeighborClassifier.cs" />
+    <Compile Include="Services\Factories\SceneFactory.cs" />
     <Compile Include="Services\Factories\ShapeFactory.cs" />
     <Compile Include="Services\IO\JsonManager.cs" />
     <Compile Include="Services\App\SaveFormat.cs" />
@@ -87,11 +88,11 @@
     <Compile Include="Views\Controls\CountryGridControl.Designer.cs">
       <DependentUpon>CountryGridControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Schedule3DControl.cs">
+    <Compile Include="Views\Controls\Scene3DDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Controls\Schedule3DControl.Designer.cs">
-      <DependentUpon>Schedule3DControl.cs</DependentUpon>
+    <Compile Include="Views\Controls\Scene3DDisplayControl.Designer.cs">
+      <DependentUpon>Scene3DDisplayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\ClassifierType.cs" />
     <Compile Include="Views\Forms\MainForm.cs">
@@ -109,6 +110,18 @@
       <DependentUpon>ResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MessageBoxManager.cs" />
+    <Compile Include="Views\Tabs\MainTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\MainTab.Designer.cs">
+      <DependentUpon>MainTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\ResultTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\ResultTab.Designer.cs">
+      <DependentUpon>ResultTab.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -124,14 +137,21 @@
     <EmbeddedResource Include="Views\Controls\CountryGridControl.resx">
       <DependentUpon>CountryGridControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Controls\Schedule3DControl.resx">
-      <DependentUpon>Schedule3DControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Controls\Scene3DDisplayControl.resx">
+      <DependentUpon>Scene3DDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\ResultForm.resx">
       <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\MainTab.resx">
+      <DependentUpon>MainTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\ResultTab.resx">
+      <DependentUpon>ResultTab.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -150,6 +170,8 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\Validators\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

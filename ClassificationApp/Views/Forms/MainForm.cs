@@ -40,8 +40,8 @@ namespace ClassificationApp.Views.Forms
             finally
             {
                 _session = save == null ? _session : save.Session;
-                EductaionCountryGridControl.Countries = _session.Education;
-                TestCountryGridControl.Countries = _session.Test;
+                MainTab.Education = _session.Education;
+                MainTab.Test = _session.Test;
             }
         }
 
@@ -60,18 +60,7 @@ namespace ClassificationApp.Views.Forms
 
         private void ClassifierControl_ButtonClicked(object sender, EventArgs e)
         {
-            IClassifier classifier = null;
-            switch(ClassifierControl.ClassifierType)
-            {
-                case ClassifierType.LinearClassifier: classifier = new LinearClassifier(); break;
-                case ClassifierType.NeighborClassifier: classifier = new
-                        NeighborClassifier(ClassifierControl.NeighborsCount); break;
-                default: throw new ArgumentException();
-            }
-            classifier.Educate(EductaionCountryGridControl.Countries);
-            ResultForm form = new ResultForm();
-            form.Countries = classifier.Classify(TestCountryGridControl.Countries);
-            form.ShowDialog();
+            
         }
     }
 }

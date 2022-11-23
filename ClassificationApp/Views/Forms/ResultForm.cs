@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ClassificationApp.Models.Countries;
+using ClassificationApp.Models.Scenes;
 
 namespace ClassificationApp.Views.Forms
 {
@@ -18,7 +19,15 @@ namespace ClassificationApp.Views.Forms
         {
             set
             {
-                CountryGridControl.Countries = value;
+                ResultTab.Result = value;
+            }
+        }
+
+        public Scene3D Scene3D
+        {
+            set
+            {
+                ResultTab.Scene3D = value;
             }
         }
 

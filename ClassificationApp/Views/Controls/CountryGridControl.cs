@@ -15,9 +15,11 @@ namespace ClassificationApp.Views.Controls
 {
     public partial class CountryGridControl : UserControl
     {
-        BindingList<Country> _bindingList = new BindingList<Country>();
+        private BindingList<Country> _bindingList = new BindingList<Country>();
 
-        BindingSource _bindingSource = new BindingSource();
+        private BindingSource _bindingSource = new BindingSource();
+
+        private bool _isEditor = true;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Countries
@@ -27,6 +29,23 @@ namespace ClassificationApp.Views.Controls
             {
                 _bindingList = new BindingList<Country>(value);
                 DataGridView.DataSource = _bindingList;
+            }
+        }
+
+        public bool IsEditor
+        {
+            get => _isEditor;
+            set
+            {
+                _isEditor = value;
+                if(value)
+                {
+                    DataGridView.ReadOnly = false;
+                }
+                else
+                {
+                    DataGridView.ReadOnly = true;
+                }
             }
         }
 

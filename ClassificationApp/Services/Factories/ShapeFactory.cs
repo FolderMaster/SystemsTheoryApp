@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ClassificationApp.Models.Countries;
-using ClassificationApp.Models.Schedules;
+using ClassificationApp.Models.Scenes;
 
 namespace ClassificationApp.Services.Factories
 {
@@ -46,6 +46,17 @@ namespace ClassificationApp.Services.Factories
                 coordinates.Add(point2.Coordinates[n] - point1.Coordinates[n]);
             }
             return new Vector(coordinates);
+        }
+
+        public static Plane CreatePlaneByPoindAndVector(Point point, Vector vector)
+        {
+            Plane result = new Plane();
+            result.A = vector.Coordinates[0];
+            result.B = vector.Coordinates[1];
+            result.C = vector.Coordinates[2];
+            result.D = - vector.Coordinates[0] * point.Coordinates[0] - vector.Coordinates[1]
+                * point.Coordinates[1] - vector.Coordinates[2] * point.Coordinates[2];
+            return result;
         }
     }
 }

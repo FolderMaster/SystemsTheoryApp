@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ClassificationApp.Models.Countries;
-using ClassificationApp.Models.Schedules;
+using ClassificationApp.Models.Scenes;
 using ClassificationApp.Services.Factories;
 
 namespace ClassificationApp.Services.Classification
 {
     public class NeighborClassifier : IClassifier
     {
-        private bool _isEducated = false;
+        public bool IsEducated { get; private set; } = false;
 
-        private List<Point> _points = new List<Point>();
+        public List<Point> EduccationPoints { get; private set; } = new List<Point>();
 
-        public List<Point> Points
-        {
-            get => _points;
-            private set => _points = value;
-        }
-
-        public bool IsEducated
-        {
-            get => _isEducated;
-            private set => _isEducated = value;
-        }
+        public List<Point> ResultPoints { get; private set; } = new List<Point>();
 
         public int NeighborsCount { get; set; } = 1;
 
@@ -41,7 +31,7 @@ namespace ClassificationApp.Services.Classification
         {
             foreach(Country country in list)
             {
-                Points.Add(ShapeFactory.CreatePointByCountry(country));
+                EduccationPoints.Add(ShapeFactory.CreatePointByCountry(country));
             }
             IsEducated = true;
         }
@@ -63,9 +53,9 @@ namespace ClassificationApp.Services.Classification
                 for(int n = 0; n < points.Count; n++)
                 {
                     List<(double, int)> distances = new List<(double, int)>();
-                    for(int h = 0; h < Points.Count; ++h)
+                    for(int h = 0; h < EduccationPoints.Count; ++h)
                     {
-                        distances.Add((points[n].GetDistance(Points[h]), h));
+                        distances.Add((points[n].GetDistance(EduccationPoints[h]), h));
                     }
 
                     int developingsCount = 0;
@@ -75,7 +65,7 @@ namespace ClassificationApp.Services.Classification
                         double min = distances.Select(a => a.Item1).Min();
                         (double, int) distance = distances.First(a => a.Item1 == min);
 
-                        Point point = Points[distance.Item2];
+                        Point point = EduccationPoints[distance.Item2];
                         if ((CountryType)point.Tag == CountryType.Developed)
                         {
                             ++developedsCount;
@@ -101,6 +91,7 @@ namespace ClassificationApp.Services.Classification
                         country.Type = CountryType.None;
                     }
                     result.Add(country);
+                    ResultPoints.Add(ShapeFactory.CreatePointByCountry(country));
                 }
                 return result;
             }
