@@ -53,6 +53,7 @@
     <Compile Include="Models\Countries\CountryType.cs" />
     <Compile Include="Models\Scenes\Axis.cs" />
     <Compile Include="Models\Scenes\Camera3D.cs" />
+    <Compile Include="Models\Scenes\Camera3DSettings.cs" />
     <Compile Include="Models\Scenes\ICamera.cs" />
     <Compile Include="Models\Scenes\IScale.cs" />
     <Compile Include="Models\Scenes\IScene.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\Scenes\LogScale.cs" />
     <Compile Include="Models\Scenes\Plane.cs" />
     <Compile Include="Models\Scenes\Point.cs" />
+    <Compile Include="Models\Scenes\Polygon.cs" />
     <Compile Include="Models\Scenes\Vector.cs" />
     <Compile Include="Models\Scenes\Scene3D.cs" />
     <Compile Include="Models\Scenes\Graph3D.cs" />

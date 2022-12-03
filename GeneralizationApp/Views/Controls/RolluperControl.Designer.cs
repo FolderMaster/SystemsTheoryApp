@@ -48,14 +48,14 @@
             this.RolluperTypeLabel.AutoSize = true;
             this.RolluperTypeLabel.Location = new System.Drawing.Point(81, 5);
             this.RolluperTypeLabel.Name = "RolluperTypeLabel";
-            this.RolluperTypeLabel.Size = new System.Drawing.Size(73, 13);
+            this.RolluperTypeLabel.Size = new System.Drawing.Size(72, 13);
             this.RolluperTypeLabel.TabIndex = 4;
-            this.RolluperTypeLabel.Text = "RolluperType:";
+            this.RolluperTypeLabel.Text = "Rolluper type:";
             // 
             // ComboBox
             // 
             this.ComboBox.FormattingEnabled = true;
-            this.ComboBox.Location = new System.Drawing.Point(160, 2);
+            this.ComboBox.Location = new System.Drawing.Point(159, 2);
             this.ComboBox.Name = "ComboBox";
             this.ComboBox.Size = new System.Drawing.Size(121, 21);
             this.ComboBox.TabIndex = 3;

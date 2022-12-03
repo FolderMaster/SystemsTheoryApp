@@ -41,10 +41,10 @@ namespace GeneralizationApp.Views.Controls
         {
             DataTable dataTable = new DataTable();
 
-            dataTable.Columns.Add("*", typeof(int));
+            dataTable.Columns.Add("*", typeof(string));
             for (int n = 0; n < objectCount; ++n)
             {
-                dataTable.Columns.Add($"{n}", typeof(int));
+                dataTable.Columns.Add($"{n + 1}", typeof(int));
             }
             if (dataTable.Columns.Count > 0)
             {
@@ -53,7 +53,7 @@ namespace GeneralizationApp.Views.Controls
 
             for (int n = 0; n < expertCount; ++n)
             {
-                dataTable.Rows.Add($"{n}");
+                dataTable.Rows.Add($"{n + 1}");
             }
 
             return dataTable;

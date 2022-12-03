@@ -1,4 +1,4 @@
-﻿namespace ClassificationApp.Views.Forms
+﻿namespace GeneralizationApp.Views.Forms
 {
     partial class ResultForm
     {
@@ -28,26 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ResultTab = new ClassificationApp.Views.Tabs.ResultTab();
+            this.ResultTab = new GeneralizationApp.Views.Tabs.ResultTab();
             this.SuspendLayout();
             // 
             // ResultTab
             // 
             this.ResultTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResultTab.Location = new System.Drawing.Point(3, 3);
+            this.ResultTab.Location = new System.Drawing.Point(0, 0);
             this.ResultTab.Name = "ResultTab";
-            this.ResultTab.Size = new System.Drawing.Size(747, 444);
+            this.ResultTab.Size = new System.Drawing.Size(419, 92);
             this.ResultTab.TabIndex = 0;
             // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 450);
+            this.ClientSize = new System.Drawing.Size(419, 92);
             this.Controls.Add(this.ResultTab);
-            this.KeyPreview = true;
             this.Name = "ResultForm";
-            this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "Result";
             this.ResumeLayout(false);
 

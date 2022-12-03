@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace GeneralizationApp.Services.Validators
 {
@@ -28,7 +29,21 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
-        public static void AssertMatrixIsRankingExpertRatingTable(int[,] matrix, string name)
+        public static void AssertMatrixIsPositive(double[,] matrix, string name)
+        {
+            AssertIsNotNull(matrix, name);
+            int rowCount = matrix.GetLength(0);
+            int columnCount = matrix.GetLength(1);
+            for (int y = 0; y < rowCount; ++y)
+            {
+                for (int x = 0; x < columnCount; ++x)
+                {
+                    AssertValueIsPositive(matrix[y, x], $"{name}[{y}, {x}]");
+                }
+            }
+        }
+
+        public static void AssertMatrixIsRankingTable(int[,] matrix, string name)
         {
             AssertIsNotNull(matrix, name);
             int expertCount = matrix.GetLength(0);
@@ -51,6 +66,15 @@ namespace GeneralizationApp.Services.Validators
                         throw new ArgumentException($"{name}'s row {y} must contain ranks");
                     }
                 }
+            }
+        }
+
+        public static void AssertMatrixSumIsEqualToOne(double[] matrix, string name)
+        {
+            AssertIsNotNull(matrix, name);
+            if(Math.Abs(matrix.Sum() - 1) > 0.1)
+            {
+                throw new ArgumentException($"{name}'s sum must be equal to one");
             }
         }
     }

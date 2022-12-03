@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ClassificationApp.Models.Scenes;
@@ -20,6 +15,7 @@ namespace ClassificationApp.Views.Controls
 
         private Scene3D _scene3D;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Camera3D Camera3D
         {
             get => (Camera3D)Scene3D.Camera;
@@ -40,9 +36,6 @@ namespace ClassificationApp.Views.Controls
                     _scene3D = value;
                     Camera3D.Width = Width;
                     Camera3D.Height = Height;
-
-                    Camera3D.Point = new Models.Scenes.Point(new List<double>() { 0, -100, 0 });
-                    Camera3D.Vector = new Models.Scenes.Vector(new List<double>() { 0, 1, 0 });
 
                     Invalidate();
                 }

@@ -69,14 +69,14 @@
             this.NeighborsCountLabel.AutoSize = true;
             this.NeighborsCountLabel.Location = new System.Drawing.Point(265, 5);
             this.NeighborsCountLabel.Name = "NeighborsCountLabel";
-            this.NeighborsCountLabel.Size = new System.Drawing.Size(86, 13);
+            this.NeighborsCountLabel.Size = new System.Drawing.Size(88, 13);
             this.NeighborsCountLabel.TabIndex = 4;
-            this.NeighborsCountLabel.Text = "NeighborsCount:";
+            this.NeighborsCountLabel.Text = "Neighbors count:";
             this.NeighborsCountLabel.Visible = false;
             // 
             // NeighborsCountNumericUpDown
             // 
-            this.NeighborsCountNumericUpDown.Location = new System.Drawing.Point(357, 3);
+            this.NeighborsCountNumericUpDown.Location = new System.Drawing.Point(359, 3);
             this.NeighborsCountNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,

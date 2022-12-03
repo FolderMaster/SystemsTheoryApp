@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,23 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ObjectCriteriaRollupTable.cs" />
+    <Compile Include="Models\ObjectCriteriaTable.cs" />
     <Compile Include="Models\ScoringExpertRatingTable.cs" />
     <Compile Include="Models\RankingExpertRatingTable.cs" />
-    <Compile Include="Services\Generalizaters\PairComparisonGeneralizer.cs" />
-    <Compile Include="Services\Generalizaters\RankingGeneralizer.cs" />
-    <Compile Include="Services\Generalizaters\ScoringGeneralizer.cs" />
-    <Compile Include="Services\Generalizaters\ScoringGeneralizerWithCompetencies.cs" />
-    <Compile Include="Services\Rollupers\AdditiveRolluper.cs" />
-    <Compile Include="Services\Rollupers\IdealPointRolluper.cs" />
-    <Compile Include="Services\Rollupers\MultiplicativeRolluper.cs" />
+    <Compile Include="Services\App\SaveFormat.cs" />
+    <Compile Include="Services\App\Session.cs" />
+    <Compile Include="Services\App\Settings.cs" />
+    <Compile Include="Services\Generalizaters\RankingExpertRatingTableGeneralizer.cs" />
+    <Compile Include="Services\Generalizaters\ScoringExpertRatingTableGeneralizer.cs" />
+    <Compile Include="Services\IO\JsonManager.cs" />
+    <Compile Include="Services\Rollupers\ObjectCriteriaTableRolluper.cs" />
     <Compile Include="Services\Validators\ValueValidator.cs" />
     <Compile Include="Views\ColorManager.cs" />
-    <Compile Include="Views\Controls\ObjectCriteriaRollupTableControl.cs">
+    <Compile Include="Views\Controls\BoolTableGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Controls\ObjectCriteriaRollupTableControl.Designer.cs">
-      <DependentUpon>ObjectCriteriaRollupTableControl.cs</DependentUpon>
+    <Compile Include="Views\Controls\BoolTableGridControl.Designer.cs">
+      <DependentUpon>BoolTableGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ObjectCriteriaTableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\ObjectCriteriaTableControl.Designer.cs">
+      <DependentUpon>ObjectCriteriaTableControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RolluperControl.cs">
       <SubType>UserControl</SubType>
@@ -71,11 +80,11 @@
       <DependentUpon>RolluperControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RolluperType.cs" />
-    <Compile Include="Views\Controls\TableWeightsGridControl.cs">
+    <Compile Include="Views\Controls\DoubleTableGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Controls\TableWeightsGridControl.Designer.cs">
-      <DependentUpon>TableWeightsGridControl.cs</DependentUpon>
+    <Compile Include="Views\Controls\DoubleTableGridControl.Designer.cs">
+      <DependentUpon>DoubleTableGridControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RankingGeneralizerControl.cs">
       <SubType>UserControl</SubType>
@@ -116,18 +125,30 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Forms\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageBoxManager.cs" />
-    <Compile Include="Views\Tabs\ObjectCriteriaRollupTableTab.cs">
+    <Compile Include="Views\Tabs\ObjectCriteriaTableTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Tabs\ObjectCriteriaRollupTableTab.Designer.cs">
-      <DependentUpon>ObjectCriteriaRollupTableTab.cs</DependentUpon>
+    <Compile Include="Views\Tabs\ObjectCriteriaTableTab.Designer.cs">
+      <DependentUpon>ObjectCriteriaTableTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Tabs\RankingExpertRatingTableTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Tabs\RankingExpertRatingTableTab.Designer.cs">
       <DependentUpon>RankingExpertRatingTableTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\ResultTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\ResultTab.Designer.cs">
+      <DependentUpon>ResultTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Tabs\ScoringExpertRatingTableTab.cs">
       <SubType>UserControl</SubType>
@@ -144,14 +165,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\Controls\ObjectCriteriaRollupTableControl.resx">
-      <DependentUpon>ObjectCriteriaRollupTableControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Controls\BoolTableGridControl.resx">
+      <DependentUpon>BoolTableGridControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Controls\ObjectCriteriaTableControl.resx">
+      <DependentUpon>ObjectCriteriaTableControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Controls\RolluperControl.resx">
       <DependentUpon>RolluperControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Controls\TableWeightsGridControl.resx">
-      <DependentUpon>TableWeightsGridControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Controls\DoubleTableGridControl.resx">
+      <DependentUpon>DoubleTableGridControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Controls\RankingExpertRatingTableControl.resx">
       <DependentUpon>RankingExpertRatingTableControl.cs</DependentUpon>
@@ -171,15 +195,22 @@
     <EmbeddedResource Include="Views\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Tabs\ObjectCriteriaRollupTableTab.resx">
-      <DependentUpon>ObjectCriteriaRollupTableTab.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Forms\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\ObjectCriteriaTableTab.resx">
+      <DependentUpon>ObjectCriteriaTableTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Tabs\RankingExpertRatingTableTab.resx">
       <DependentUpon>RankingExpertRatingTableTab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\ResultTab.resx">
+      <DependentUpon>ResultTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Tabs\ScoringExpertRatingTableTab.resx">
       <DependentUpon>ScoringExpertRatingTableTab.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -2,7 +2,7 @@
 {
     public enum RankingGeneralizerType
     {
-        RankingGeneralizer,
+        RangingGeneralizer,
         PairComparisonGeneralizer
     }
 }

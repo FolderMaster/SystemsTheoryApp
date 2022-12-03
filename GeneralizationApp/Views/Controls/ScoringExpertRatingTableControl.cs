@@ -2,24 +2,59 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
+using GeneralizationApp.Models;
+
 namespace GeneralizationApp.Views.Controls
 {
     public partial class ScoringExpertRatingTableControl : UserControl
     {
         private bool _withCompetencies = false;
 
-        private int _expertCount = 1;
+        private int _expertCount = 0;
 
-        private int _objectCount = 1;
+        private int _objectCount = 0;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ScoringExpertRatingTable ScoringExpertRatingTable
+        {
+            get => new ScoringExpertRatingTable(TableMatrix, WithCompetencies ? CompetenceMatrix : 
+                null);
+            set
+            {
+                if (value != null)
+                {
+                    TableMatrix = value.TableMatrix;
+                    if(value.CompetenceMatrix != null)
+                    {
+                        CompetenceMatrix = value.CompetenceMatrix;
+                        WithCompetencies = true;
+                    }
+                    else
+                    {
+                        CompetenceMatrix = new double[ExpertCount];
+                        WithCompetencies = false;
+                    }
+                }
+                else
+                {
+                    TableMatrix = new double[0, 0];
+                    CompetenceMatrix = new double[0];
+                }
+            }
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] TableMatrix
         {
             get => ScoringTableGridControl.TableMatrix;
-            set => ScoringTableGridControl.TableMatrix = value;
+            set
+            {
+                ScoringTableGridControl.TableMatrix = value;
+                ExpertCount = TableMatrix.GetLength(0);
+                ObjectCount = TableMatrix.GetLength(1);
+            }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool WithCompetencies
         {
             get => _withCompetencies;
@@ -28,20 +63,42 @@ namespace GeneralizationApp.Views.Controls
                 WithCompetenciesCheckBox.Checked = _withCompetencies = value;
                 if (_withCompetencies)
                 {
-                    TableWeightsGridControl.Visible = true;
+                    CompetenceTableGridControl.Visible = true;
                 }
                 else
                 {
-                    TableWeightsGridControl.Visible = false;
+                    CompetenceTableGridControl.Visible = false;
                 }
             }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double[] WeightMatrix
+        public double[] CompetenceMatrix
         {
-            get => TableWeightsGridControl.TableMatrix;
-            set => TableWeightsGridControl.TableMatrix = value;
+            get => CompetenceTableGridControl.TableMatrix;
+            set => CompetenceTableGridControl.TableMatrix = value;
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int ExpertCount
+        {
+            get => _expertCount;
+            private set
+            {
+                _expertCount = value;
+                ExpertCountNumericUpDown.Value = value;
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int ObjectCount
+        {
+            get => _objectCount;
+            private set
+            {
+                _objectCount = value;
+                ObjectCountNumericUpDown.Value = value;
+            }
         }
 
         public ScoringExpertRatingTableControl()
@@ -51,18 +108,18 @@ namespace GeneralizationApp.Views.Controls
 
         private void ExpertCountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            _expertCount = (int)ExpertCountNumericUpDown.Value;
+            ExpertCount = (int)ExpertCountNumericUpDown.Value;
         }
 
         private void ObjectCountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            _objectCount = (int)ObjectCountNumericUpDown.Value;
+            ObjectCount = (int)ObjectCountNumericUpDown.Value;
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            TableMatrix = new double[_expertCount, _objectCount];
-            WeightMatrix = new double[_expertCount];
+            TableMatrix = new double[ExpertCount, ObjectCount];
+            CompetenceMatrix = new double[ExpertCount];
         }
 
         private void WithCompetenciesCheckBox_CheckedChanged(object sender, EventArgs e)

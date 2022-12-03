@@ -7,9 +7,9 @@ using GeneralizationApp.Services.Validators;
 
 namespace GeneralizationApp.Views.Controls
 {
-    public partial class TableWeightsGridControl : UserControl
+    public partial class DoubleTableGridControl : UserControl
     {
-        private int _weightCount = 0;
+        private int _count = 0;
 
         private double[] _tableMatrix = new double[0];
 
@@ -22,13 +22,19 @@ namespace GeneralizationApp.Views.Controls
             set
             {
                 _tableMatrix = value;
-                _weightCount = value.Length;
-                _dataTable = CreateDataTable(_weightCount);
+                _count = value.Length;
+                _dataTable = CreateDataTable(_count);
                 UpdateDataTable();
             }
         }
 
-        public TableWeightsGridControl()
+        public bool IsReadOnly
+        {
+            get => DataGridView.ReadOnly;
+            set => DataGridView.ReadOnly = value;
+        }
+
+        public DoubleTableGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
@@ -39,7 +45,7 @@ namespace GeneralizationApp.Views.Controls
             DataTable dataTable = new DataTable();
             for (int n = 0; n < weightCount; ++n)
             {
-                dataTable.Columns.Add($"{n}", typeof(double));
+                dataTable.Columns.Add($"{n + 1}", typeof(double));
             }
             dataTable.Rows.Add();
             return dataTable;
@@ -47,7 +53,7 @@ namespace GeneralizationApp.Views.Controls
 
         private void UpdateDataTable()
         {
-            for (int x = 0; x < _weightCount; x++)
+            for (int x = 0; x < _count; x++)
             {
                 _dataTable.Rows[0][x] = TableMatrix[x];
             }

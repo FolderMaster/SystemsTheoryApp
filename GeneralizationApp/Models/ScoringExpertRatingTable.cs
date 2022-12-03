@@ -1,31 +1,44 @@
-﻿namespace GeneralizationApp.Models
+﻿using GeneralizationApp.Services.Validators;
+
+namespace GeneralizationApp.Models
 {
     public class ScoringExpertRatingTable
     {
-        private double[,] _tableMatrix = new double[0, 0];
+        private double[,] _tableMatrix = null;
 
-        private double[] _weightMatrix = new double[0];
+        private double[] _сompetenceMatrix = null;
 
         public double[,] TableMatrix
         {
             get => _tableMatrix;
-            set => _tableMatrix = value;
+            set
+            {
+                ValueValidator.AssertMatrixIsPositive(value, nameof(TableMatrix));
+                _tableMatrix = value;
+            }
         }
 
-        public double[] WeightMatrix
+        public double[] CompetenceMatrix
         {
-            get => _weightMatrix;
-            set => _weightMatrix = value;
+            get => _сompetenceMatrix;
+            set
+            {
+                if(value != null)
+                {
+                    ValueValidator.AssertMatrixSumIsEqualToOne(value, nameof(CompetenceMatrix));
+                }
+                _сompetenceMatrix = value;
+            }
         }
 
         public ScoringExpertRatingTable()
         {
         }
 
-        public ScoringExpertRatingTable(double[,] tableMatrix, double[] weightMatrix)
+        public ScoringExpertRatingTable(double[,] tableMatrix, double[] сompetenceMatrix)
         {
             TableMatrix = tableMatrix;
-            WeightMatrix = weightMatrix;
+            CompetenceMatrix = сompetenceMatrix;
         }
     }
 }

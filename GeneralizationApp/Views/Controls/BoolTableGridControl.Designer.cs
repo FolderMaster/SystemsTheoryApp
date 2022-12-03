@@ -1,6 +1,6 @@
 ﻿namespace GeneralizationApp.Views.Controls
 {
-    partial class TableWeightsGridControl
+    partial class BoolTableGridControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -35,24 +35,23 @@
             // DataGridView
             // 
             this.DataGridView.AllowUserToAddRows = false;
-            this.DataGridView.AllowUserToDeleteRows = false;
             this.DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridView.Location = new System.Drawing.Point(0, 0);
             this.DataGridView.Name = "DataGridView";
-            this.DataGridView.Size = new System.Drawing.Size(799, 181);
-            this.DataGridView.TabIndex = 1;
-            this.DataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellEndEdit);
-            this.DataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView_CellValidating);
+            this.DataGridView.Size = new System.Drawing.Size(475, 84);
+            this.DataGridView.TabIndex = 0;
+            this.DataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
+            this.DataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellValueChanged);
             // 
-            // RatingTableWeightsGridControl
+            // BoolTableGridControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.DataGridView);
-            this.Name = "RatingTableWeightsGridControl";
-            this.Size = new System.Drawing.Size(799, 181);
+            this.Name = "BoolTableGridControl";
+            this.Size = new System.Drawing.Size(475, 84);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
 

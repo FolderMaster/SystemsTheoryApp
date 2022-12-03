@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ClassificationApp.Services.IO;
 using ClassificationApp.Services.App;
-using ClassificationApp.Services.Classification;
-using ClassificationApp.Views.Controls;
 
 namespace ClassificationApp.Views.Forms
 {
@@ -56,11 +47,6 @@ namespace ClassificationApp.Views.Forms
             {
                 MessageBoxManager.ShowError(ex.Message);
             }
-        }
-
-        private void ClassifierControl_ButtonClicked(object sender, EventArgs e)
-        {
-            
         }
     }
 }

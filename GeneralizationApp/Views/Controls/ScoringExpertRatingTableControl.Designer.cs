@@ -34,29 +34,31 @@
             this.WithCompetenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.ObjectCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.ExpertCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.TableWeightsGridControl = new GeneralizationApp.Views.Controls.TableWeightsGridControl();
+            this.CompetenceTableGridControl = new GeneralizationApp.Views.Controls.DoubleTableGridControl();
             this.ScoringTableGridControl = new GeneralizationApp.Views.Controls.ScoringTableGridControl();
+            this.TableGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.ObjectCountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpertCountNumericUpDown)).BeginInit();
+            this.TableGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ObjectCountLabel
             // 
             this.ObjectCountLabel.AutoSize = true;
-            this.ObjectCountLabel.Location = new System.Drawing.Point(120, 4);
+            this.ObjectCountLabel.Location = new System.Drawing.Point(122, 4);
             this.ObjectCountLabel.Name = "ObjectCountLabel";
-            this.ObjectCountLabel.Size = new System.Drawing.Size(69, 13);
+            this.ObjectCountLabel.Size = new System.Drawing.Size(71, 13);
             this.ObjectCountLabel.TabIndex = 9;
-            this.ObjectCountLabel.Text = "ObjectCount:";
+            this.ObjectCountLabel.Text = "Object count:";
             // 
             // ExpertCountLabel
             // 
             this.ExpertCountLabel.AutoSize = true;
             this.ExpertCountLabel.Location = new System.Drawing.Point(-3, 4);
             this.ExpertCountLabel.Name = "ExpertCountLabel";
-            this.ExpertCountLabel.Size = new System.Drawing.Size(68, 13);
+            this.ExpertCountLabel.Size = new System.Drawing.Size(70, 13);
             this.ExpertCountLabel.TabIndex = 8;
-            this.ExpertCountLabel.Text = "ExpertCount:";
+            this.ExpertCountLabel.Text = "Expert count:";
             // 
             // CreateButton
             // 
@@ -75,74 +77,66 @@
             this.WithCompetenciesCheckBox.AutoSize = true;
             this.WithCompetenciesCheckBox.Location = new System.Drawing.Point(0, 334);
             this.WithCompetenciesCheckBox.Name = "WithCompetenciesCheckBox";
-            this.WithCompetenciesCheckBox.Size = new System.Drawing.Size(118, 17);
+            this.WithCompetenciesCheckBox.Size = new System.Drawing.Size(117, 17);
             this.WithCompetenciesCheckBox.TabIndex = 11;
-            this.WithCompetenciesCheckBox.Text = "With Competencies";
+            this.WithCompetenciesCheckBox.Text = "With competencies";
             this.WithCompetenciesCheckBox.UseVisualStyleBackColor = true;
             this.WithCompetenciesCheckBox.CheckedChanged += new System.EventHandler(this.WithCompetenciesCheckBox_CheckedChanged);
             // 
             // ObjectCountNumericUpDown
             // 
-            this.ObjectCountNumericUpDown.Location = new System.Drawing.Point(195, 2);
-            this.ObjectCountNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.ObjectCountNumericUpDown.Location = new System.Drawing.Point(199, 2);
             this.ObjectCountNumericUpDown.Name = "ObjectCountNumericUpDown";
             this.ObjectCountNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.ObjectCountNumericUpDown.TabIndex = 13;
-            this.ObjectCountNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.ObjectCountNumericUpDown.ValueChanged += new System.EventHandler(this.ObjectCountNumericUpDown_ValueChanged);
             // 
             // ExpertCountNumericUpDown
             // 
-            this.ExpertCountNumericUpDown.Location = new System.Drawing.Point(71, 2);
-            this.ExpertCountNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.ExpertCountNumericUpDown.Location = new System.Drawing.Point(73, 2);
             this.ExpertCountNumericUpDown.Name = "ExpertCountNumericUpDown";
             this.ExpertCountNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.ExpertCountNumericUpDown.TabIndex = 12;
-            this.ExpertCountNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.ExpertCountNumericUpDown.ValueChanged += new System.EventHandler(this.ExpertCountNumericUpDown_ValueChanged);
             // 
-            // RatingTableWeightsGridControl
+            // CompetenceTableGridControl
             // 
-            this.TableWeightsGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.CompetenceTableGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TableWeightsGridControl.Location = new System.Drawing.Point(0, 357);
-            this.TableWeightsGridControl.Name = "RatingTableWeightsGridControl";
-            this.TableWeightsGridControl.Size = new System.Drawing.Size(788, 49);
-            this.TableWeightsGridControl.TabIndex = 15;
-            this.TableWeightsGridControl.Visible = false;
+            this.CompetenceTableGridControl.IsReadOnly = false;
+            this.CompetenceTableGridControl.Location = new System.Drawing.Point(0, 357);
+            this.CompetenceTableGridControl.Name = "CompetenceTableGridControl";
+            this.CompetenceTableGridControl.Size = new System.Drawing.Size(788, 49);
+            this.CompetenceTableGridControl.TabIndex = 15;
+            this.CompetenceTableGridControl.Visible = false;
             // 
             // ScoringTableGridControl
             // 
-            this.ScoringTableGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ScoringTableGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScoringTableGridControl.Location = new System.Drawing.Point(3, 16);
+            this.ScoringTableGridControl.Name = "ScoringTableGridControl";
+            this.ScoringTableGridControl.Size = new System.Drawing.Size(782, 281);
+            this.ScoringTableGridControl.TabIndex = 14;
+            // 
+            // TableGroupBox
+            // 
+            this.TableGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScoringTableGridControl.Location = new System.Drawing.Point(0, 28);
-            this.ScoringTableGridControl.Name = "ScoringTableGridControl";
-            this.ScoringTableGridControl.Size = new System.Drawing.Size(788, 300);
-            this.ScoringTableGridControl.TabIndex = 14;
+            this.TableGroupBox.Controls.Add(this.ScoringTableGridControl);
+            this.TableGroupBox.Location = new System.Drawing.Point(0, 28);
+            this.TableGroupBox.Name = "TableGroupBox";
+            this.TableGroupBox.Size = new System.Drawing.Size(788, 300);
+            this.TableGroupBox.TabIndex = 16;
+            this.TableGroupBox.TabStop = false;
+            this.TableGroupBox.Text = "Table";
             // 
             // ScoringExpertRatingTableControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TableWeightsGridControl);
-            this.Controls.Add(this.ScoringTableGridControl);
+            this.Controls.Add(this.TableGroupBox);
+            this.Controls.Add(this.CompetenceTableGridControl);
             this.Controls.Add(this.ObjectCountNumericUpDown);
             this.Controls.Add(this.ExpertCountNumericUpDown);
             this.Controls.Add(this.WithCompetenciesCheckBox);
@@ -153,6 +147,7 @@
             this.Size = new System.Drawing.Size(788, 406);
             ((System.ComponentModel.ISupportInitialize)(this.ObjectCountNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpertCountNumericUpDown)).EndInit();
+            this.TableGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,6 +162,7 @@
         private System.Windows.Forms.NumericUpDown ObjectCountNumericUpDown;
         private System.Windows.Forms.NumericUpDown ExpertCountNumericUpDown;
         private ScoringTableGridControl ScoringTableGridControl;
-        private TableWeightsGridControl TableWeightsGridControl;
+        private DoubleTableGridControl CompetenceTableGridControl;
+        private System.Windows.Forms.GroupBox TableGroupBox;
     }
 }

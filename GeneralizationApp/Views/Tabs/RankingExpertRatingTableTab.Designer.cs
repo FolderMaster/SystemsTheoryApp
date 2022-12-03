@@ -30,6 +30,8 @@
         {
             this.RankingGeneralizerControl = new GeneralizationApp.Views.Controls.RankingGeneralizerControl();
             this.RankingExpertRatingTableControl = new GeneralizationApp.Views.Controls.RankingExpertRatingTableControl();
+            this.RankingExpertRatingTableGroupBox = new System.Windows.Forms.GroupBox();
+            this.RankingExpertRatingTableGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // RankingGeneralizerControl
@@ -44,22 +46,34 @@
             // 
             // RankingExpertRatingTableControl
             // 
-            this.RankingExpertRatingTableControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.RankingExpertRatingTableControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RankingExpertRatingTableControl.Location = new System.Drawing.Point(3, 16);
+            this.RankingExpertRatingTableControl.Name = "RankingExpertRatingTableControl";
+            this.RankingExpertRatingTableControl.Size = new System.Drawing.Size(845, 405);
+            this.RankingExpertRatingTableControl.TabIndex = 1;
+            // 
+            // RankingExpertRatingTableGroupBox
+            // 
+            this.RankingExpertRatingTableGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RankingExpertRatingTableControl.Location = new System.Drawing.Point(0, 30);
-            this.RankingExpertRatingTableControl.Name = "RankingExpertRatingTableControl";
-            this.RankingExpertRatingTableControl.Size = new System.Drawing.Size(851, 424);
-            this.RankingExpertRatingTableControl.TabIndex = 1;
+            this.RankingExpertRatingTableGroupBox.Controls.Add(this.RankingExpertRatingTableControl);
+            this.RankingExpertRatingTableGroupBox.Location = new System.Drawing.Point(0, 30);
+            this.RankingExpertRatingTableGroupBox.Name = "RankingExpertRatingTableGroupBox";
+            this.RankingExpertRatingTableGroupBox.Size = new System.Drawing.Size(851, 424);
+            this.RankingExpertRatingTableGroupBox.TabIndex = 2;
+            this.RankingExpertRatingTableGroupBox.TabStop = false;
+            this.RankingExpertRatingTableGroupBox.Text = "Ranking expert rating table";
             // 
             // RankingExpertRatingTableTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.RankingExpertRatingTableControl);
+            this.Controls.Add(this.RankingExpertRatingTableGroupBox);
             this.Controls.Add(this.RankingGeneralizerControl);
             this.Name = "RankingExpertRatingTableTab";
             this.Size = new System.Drawing.Size(851, 454);
+            this.RankingExpertRatingTableGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -68,5 +82,6 @@
 
         private Controls.RankingGeneralizerControl RankingGeneralizerControl;
         private Controls.RankingExpertRatingTableControl RankingExpertRatingTableControl;
+        private System.Windows.Forms.GroupBox RankingExpertRatingTableGroupBox;
     }
 }

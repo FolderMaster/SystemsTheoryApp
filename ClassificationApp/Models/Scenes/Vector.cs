@@ -115,6 +115,11 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        public double GetAngle(int axisIndex)
+        {
+            return Coordinates[axisIndex] / Abs;
+        }
+
         public static Vector operator*(double value, Vector vector)
         {
             List<double> coordinates = new List<double>();

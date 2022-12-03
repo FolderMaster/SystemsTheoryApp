@@ -30,11 +30,11 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.RankingExpertRatingTableTabPage = new System.Windows.Forms.TabPage();
-            this.ScoringExpertRatingTableTabPage = new System.Windows.Forms.TabPage();
             this.RankingExpertRatingTableTab = new GeneralizationApp.Views.Tabs.RankingExpertRatingTableTab();
+            this.ScoringExpertRatingTableTabPage = new System.Windows.Forms.TabPage();
             this.ScoringExpertRatingTableTab = new GeneralizationApp.Views.Tabs.ScoringExpertRatingTableTab();
             this.ObjectCriteriaRollupTableTabPage = new System.Windows.Forms.TabPage();
-            this.objectCriteriaRollupTableTab1 = new GeneralizationApp.Views.Tabs.ObjectCriteriaRollupTableTab();
+            this.ObjectCriteriaTableTab = new GeneralizationApp.Views.Tabs.ObjectCriteriaTableTab();
             this.TabControl.SuspendLayout();
             this.RankingExpertRatingTableTabPage.SuspendLayout();
             this.ScoringExpertRatingTableTabPage.SuspendLayout();
@@ -61,8 +61,16 @@
             this.RankingExpertRatingTableTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.RankingExpertRatingTableTabPage.Size = new System.Drawing.Size(792, 424);
             this.RankingExpertRatingTableTabPage.TabIndex = 0;
-            this.RankingExpertRatingTableTabPage.Text = "RankingExpertRatingTable";
+            this.RankingExpertRatingTableTabPage.Text = "Ranking expert rating table";
             this.RankingExpertRatingTableTabPage.UseVisualStyleBackColor = true;
+            // 
+            // RankingExpertRatingTableTab
+            // 
+            this.RankingExpertRatingTableTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RankingExpertRatingTableTab.Location = new System.Drawing.Point(3, 3);
+            this.RankingExpertRatingTableTab.Name = "RankingExpertRatingTableTab";
+            this.RankingExpertRatingTableTab.Size = new System.Drawing.Size(786, 418);
+            this.RankingExpertRatingTableTab.TabIndex = 0;
             // 
             // ScoringExpertRatingTableTabPage
             // 
@@ -72,16 +80,8 @@
             this.ScoringExpertRatingTableTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.ScoringExpertRatingTableTabPage.Size = new System.Drawing.Size(792, 424);
             this.ScoringExpertRatingTableTabPage.TabIndex = 1;
-            this.ScoringExpertRatingTableTabPage.Text = "ScoringExpertRatingTable";
+            this.ScoringExpertRatingTableTabPage.Text = "Scoring expert rating table";
             this.ScoringExpertRatingTableTabPage.UseVisualStyleBackColor = true;
-            // 
-            // RankingExpertRatingTableTab
-            // 
-            this.RankingExpertRatingTableTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RankingExpertRatingTableTab.Location = new System.Drawing.Point(3, 3);
-            this.RankingExpertRatingTableTab.Name = "RankingExpertRatingTableTab";
-            this.RankingExpertRatingTableTab.Size = new System.Drawing.Size(786, 418);
-            this.RankingExpertRatingTableTab.TabIndex = 0;
             // 
             // ScoringExpertRatingTableTab
             // 
@@ -93,21 +93,22 @@
             // 
             // ObjectCriteriaRollupTableTabPage
             // 
-            this.ObjectCriteriaRollupTableTabPage.Controls.Add(this.objectCriteriaRollupTableTab1);
+            this.ObjectCriteriaRollupTableTabPage.Controls.Add(this.ObjectCriteriaTableTab);
             this.ObjectCriteriaRollupTableTabPage.Location = new System.Drawing.Point(4, 22);
             this.ObjectCriteriaRollupTableTabPage.Name = "ObjectCriteriaRollupTableTabPage";
+            this.ObjectCriteriaRollupTableTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.ObjectCriteriaRollupTableTabPage.Size = new System.Drawing.Size(792, 424);
             this.ObjectCriteriaRollupTableTabPage.TabIndex = 2;
-            this.ObjectCriteriaRollupTableTabPage.Text = "ObjectCriteriaRollupTable";
+            this.ObjectCriteriaRollupTableTabPage.Text = "Object criteria table";
             this.ObjectCriteriaRollupTableTabPage.UseVisualStyleBackColor = true;
             // 
-            // objectCriteriaRollupTableTab1
+            // ObjectCriteriaTableTab
             // 
-            this.objectCriteriaRollupTableTab1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objectCriteriaRollupTableTab1.Location = new System.Drawing.Point(0, 0);
-            this.objectCriteriaRollupTableTab1.Name = "objectCriteriaRollupTableTab1";
-            this.objectCriteriaRollupTableTab1.Size = new System.Drawing.Size(792, 424);
-            this.objectCriteriaRollupTableTab1.TabIndex = 0;
+            this.ObjectCriteriaTableTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ObjectCriteriaTableTab.Location = new System.Drawing.Point(3, 3);
+            this.ObjectCriteriaTableTab.Name = "ObjectCriteriaTableTab";
+            this.ObjectCriteriaTableTab.Size = new System.Drawing.Size(786, 418);
+            this.ObjectCriteriaTableTab.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -117,6 +118,8 @@
             this.Controls.Add(this.TabControl);
             this.Name = "MainForm";
             this.Text = "GeneralizationApp";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.TabControl.ResumeLayout(false);
             this.RankingExpertRatingTableTabPage.ResumeLayout(false);
             this.ScoringExpertRatingTableTabPage.ResumeLayout(false);
@@ -133,7 +136,7 @@
         private Tabs.RankingExpertRatingTableTab RankingExpertRatingTableTab;
         private Tabs.ScoringExpertRatingTableTab ScoringExpertRatingTableTab;
         private System.Windows.Forms.TabPage ObjectCriteriaRollupTableTabPage;
-        private Tabs.ObjectCriteriaRollupTableTab objectCriteriaRollupTableTab1;
+        private Tabs.ObjectCriteriaTableTab ObjectCriteriaTableTab;
     }
 }
 

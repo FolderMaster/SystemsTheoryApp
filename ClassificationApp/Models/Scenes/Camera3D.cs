@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-using ClassificationApp.Services.Factories;
+using ClassificationApp.Models.Countries;
 
 namespace ClassificationApp.Models.Scenes
 {
     public class Camera3D : ICamera
     {
         private Scene3D _scene3D = null;
-
-        private Vector VectorOx { get; set; } = null;
-
-        private Vector VectorOy { get; set; } = null;
 
         public IScene Scene
         {
@@ -30,9 +26,11 @@ namespace ClassificationApp.Models.Scenes
             }
         }
         
-        public Vector Vector { get; set; } = new Vector(new List<double>() { 0.5, 0.5, 0 });
+        public Vector Vector { get; set; } = new Vector(new List<double>() { 1, 0, 0 });
 
         public Point Point { get; set; } = new Point(new List<double>() { 0, 0, 0 });
+
+        public Camera3DSettings Settings { get; set; } = new Camera3DSettings();
 
         public double Distance { get; set; } = 0;
 
@@ -50,15 +48,8 @@ namespace ClassificationApp.Models.Scenes
         {
             get
             {
-                VectorOx = Width * Vector.RotateByAngleOx(Math.PI / 2).Ort;
-                VectorOy = Height * Vector.RotateByAngleOy(Math.PI / 2).Ort;
                 Bitmap bitmap = new Bitmap(Width, Height);
                 Graphics graphics = Graphics.FromImage(bitmap);
-                Font font = new Font(FontFamily.GenericMonospace, 12);
-                Brush fontBrush = new SolidBrush(Color.Black);
-                Brush pointBrush = new SolidBrush(Color.Black);
-                Pen pointPen = new Pen(Color.Red);
-                int pointSize = 10;
                 graphics.DrawRectangle(new Pen(Color.Red), 0, 0, Width - 1, Height - 1);
                 foreach (IShape shape in Scene.Shapes)
                 {
@@ -73,17 +64,25 @@ namespace ClassificationApp.Models.Scenes
                         {
                             int x = (int)point.Coordinates[0];
                             int y = (int)point.Coordinates[1];
+                            Brush pointBrush;
+                            switch(point.Tag)
+                            {
+                                case CountryType.None: pointBrush = Settings.NoneBrush; break;
+                                case CountryType.Developing: pointBrush = Settings.DevelopingBrush; break;
+                                case CountryType.Developed: pointBrush = Settings.DevelopedBrush; break;
+                                default: pointBrush = Settings.DefaultBrush; break;
+                            }
 
-                            graphics.DrawEllipse(pointPen, x - pointSize / 2, Height - y
-                                - pointSize / 2, pointSize, pointSize);
-                            graphics.FillEllipse(pointBrush, x - pointSize / 2, Height - y -
-                                pointSize / 2, pointSize, pointSize);
+                            graphics.DrawEllipse(Settings.PointPen, x - Settings.PointSize / 2, Height - y
+                                - Settings.PointSize / 2, Settings.PointSize, Settings.PointSize);
+                            graphics.FillEllipse(pointBrush, x - Settings.PointSize / 2, Height - y -
+                                Settings.PointSize / 2, Settings.PointSize, Settings.PointSize);
                         }
                     }
                 }
                 if(IsTest)
                 {
-                    DrawStrings(graphics, font, fontBrush, 0, 0, new string[] { "Camera",
+                    DrawStrings(graphics, Settings.Font, Settings.FontBrush, 0, 0, new string[] { "Camera",
                         "Width:" + Width,
                         "Heighth:" + Height,
                         "Vector",
@@ -95,8 +94,10 @@ namespace ClassificationApp.Models.Scenes
                         "y:" + Point.Coordinates[1].ToString(),
                         "z:" + Point.Coordinates[2].ToString()});
                 }
-                DrawLegend(graphics, font, fontBrush, 0, 240, 20, new Brush[] { pointBrush,
-                    pointPen.Brush }, new string[] { " - brush of point", " - pen of point" });
+                DrawLegend(graphics, Settings.Font, Settings.LegendPen, Settings.FontBrush, 0, 240,
+                    20, new Brush[] { Settings.NoneBrush,  Settings.DevelopedBrush, 
+                        Settings.DevelopingBrush, Settings.DefaultBrush }, new string[] 
+                        { " - none", " - developed", " - developing", " - default"});
                 return bitmap;
             }
         }
@@ -108,6 +109,13 @@ namespace ClassificationApp.Models.Scenes
         public Camera3D(Scene3D scene3D)
         {
             Scene = scene3D;
+        }
+
+        public Camera3D(Scene3D scene3D, Vector vector, Point point)
+        {
+            Scene = scene3D;
+            Vector = vector;
+            Point = point;
         }
 
         public Camera3D(Scene3D scene3D, Vector vector, Point point, int width, int height, double
@@ -132,10 +140,9 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
-        private void DrawLegend(Graphics graphics, Font font, Brush fontBrush, int x, int y, int
+        private void DrawLegend(Graphics graphics, Font font, Pen pen, Brush fontBrush, int x, int y, int
             width, Brush[] colorBrushes, string[] strings)
         {
-            Pen pen = new Pen(Color.Black);
             for(int n = 0; n < colorBrushes.Length && n < strings.Length; n++)
             {
                 graphics.DrawRectangle(pen, x, y, width, graphics.MeasureString(strings[n], font).Height);
@@ -147,12 +154,63 @@ namespace ClassificationApp.Models.Scenes
 
         public Point GetDisplay(Point point)
         {
-            List<double> coordinates = new List<double>
+            double xAngle = Vector.GetAngle(0);
+            double yAngle = Vector.GetAngle(1);
+            double zAngle = Vector.GetAngle(2);
+
+            double cx = Math.Cos(xAngle);
+            double cy = Math.Cos(yAngle);
+            double cz = Math.Cos(zAngle);
+
+            double sx = Math.Sin(xAngle);
+            double sy = Math.Sin(yAngle);
+            double sz = Math.Sin(zAngle);
+
+            double x = point.Coordinates[0] - Point.Coordinates[0];
+            double y = point.Coordinates[1] - Point.Coordinates[1];
+            double z = point.Coordinates[2] - Point.Coordinates[2];
+
+            double ex = Vector.Coordinates[0];
+            double ey = Vector.Coordinates[1];
+            double ez = Vector.Coordinates[2];
+
+            double dx = cy * (sz * y + cz * x) - sy * z;
+            double dy = sx * (cy * z + sy * (sz * y + cz * x)) + cx * (cz * y - sz * x);
+            double dz = cx * (cy * z + sy * (sz * y + cz * x)) - sx * (cz * y - sz * x);
+
+            double bx = ez / dz * dx + ex;
+            double by = ez / dz * dy + ey;
+
+            bx += Width / 2;
+            by += Height / 2;
+
+            if ((bx >= 0 && bx < Width) && (by >= 0 && by < Height))
             {
-                point.Coordinates[0] * (Point.Coordinates[2] + Distance) / point.Coordinates[2],
-                point.Coordinates[1] * (Point.Coordinates[2] + Distance) / point.Coordinates[2]
-            };
-            return new Point(coordinates);
+                return new Point(point.Tag, new List<double>() { bx, by });
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public LineSegment GetDisplay(LineSegment lineSegment)
+        {
+            Point begin = GetDisplay(lineSegment.Begin);
+            Point end = GetDisplay(lineSegment.End);
+            if(begin != null && end != null)
+            {
+                return new LineSegment(lineSegment.Tag, begin, end);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Polygon GetDisplay(Plane plane)
+        {
+            return new Polygon(plane.Tag);
         }
 
         public void RotateHorizontally(double angle)

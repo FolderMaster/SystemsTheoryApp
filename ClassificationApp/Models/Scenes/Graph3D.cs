@@ -121,11 +121,9 @@ namespace ClassificationApp.Models.Scenes
             {
                 Axis axis = Axises3D[n];
 
-                axis.Max = GetMax(n);
-                axis.Max = axis.MaxFunction(axis.Max);
+                axis.Max = axis.MaxFunction(GetMax(n));
 
-                axis.Min = GetMin(n);
-                axis.Min = axis.MinFunction(axis.Min);
+                axis.Min = axis.MinFunction(GetMin(n));
             }
         }
     }

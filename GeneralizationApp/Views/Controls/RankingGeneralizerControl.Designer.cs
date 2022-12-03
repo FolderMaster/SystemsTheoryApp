@@ -36,7 +36,7 @@
             // ComboBox
             // 
             this.ComboBox.FormattingEnabled = true;
-            this.ComboBox.Location = new System.Drawing.Point(188, 2);
+            this.ComboBox.Location = new System.Drawing.Point(187, 2);
             this.ComboBox.Name = "ComboBox";
             this.ComboBox.Size = new System.Drawing.Size(121, 21);
             this.ComboBox.TabIndex = 0;
@@ -46,9 +46,9 @@
             this.GeneralizationTypeLabel.AutoSize = true;
             this.GeneralizationTypeLabel.Location = new System.Drawing.Point(81, 5);
             this.GeneralizationTypeLabel.Name = "GeneralizationTypeLabel";
-            this.GeneralizationTypeLabel.Size = new System.Drawing.Size(101, 13);
+            this.GeneralizationTypeLabel.Size = new System.Drawing.Size(100, 13);
             this.GeneralizationTypeLabel.TabIndex = 1;
-            this.GeneralizationTypeLabel.Text = "GeneralizationType:";
+            this.GeneralizationTypeLabel.Text = "Generalization type:";
             // 
             // GeneralizeButton
             // 

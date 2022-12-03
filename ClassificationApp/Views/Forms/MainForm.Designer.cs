@@ -34,9 +34,9 @@
             // MainTab
             // 
             this.MainTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTab.Location = new System.Drawing.Point(0, 0);
+            this.MainTab.Location = new System.Drawing.Point(3, 3);
             this.MainTab.Name = "MainTab";
-            this.MainTab.Size = new System.Drawing.Size(730, 483);
+            this.MainTab.Size = new System.Drawing.Size(724, 477);
             this.MainTab.TabIndex = 0;
             // 
             // MainForm
@@ -46,6 +46,7 @@
             this.ClientSize = new System.Drawing.Size(730, 483);
             this.Controls.Add(this.MainTab);
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "ClassificationApp";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);

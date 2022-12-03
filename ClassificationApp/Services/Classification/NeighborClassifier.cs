@@ -96,5 +96,10 @@ namespace ClassificationApp.Services.Classification
                 return result;
             }
         }
+
+        public override string ToString()
+        {
+            return $"NeighborClassifier (NeighborsCount = {NeighborsCount})";
+        }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ClassificationApp.Models.Countries;
 using ClassificationApp.Models.Scenes;
@@ -95,6 +92,11 @@ namespace ClassificationApp.Services.Classification
                 }
                 return result;
             }
+        }
+
+        public override string ToString()
+        {
+            return "LinearClassifier";
         }
     }
 }
