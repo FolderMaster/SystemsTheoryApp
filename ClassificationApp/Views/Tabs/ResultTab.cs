@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -10,35 +11,54 @@ namespace ClassificationApp.Views.Tabs
 {
     public partial class ResultTab : UserControl
     {
+        private string _classifierName = null;
+
+        private TimeSpan _time = new TimeSpan();
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Result
         {
-            set
-            {
-                CountryGridControl.Countries = value;
-            }
+            get => CountryGridControl.Countries;
+            set => CountryGridControl.Countries = value;
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Scene3D Scene3D
         {
+            get => Scene3DDisplayControl.Scene3D;
+            set => Scene3DDisplayControl.Scene3D = value;
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string ClassifierName
+        {
+            get => _classifierName;
             set
             {
-                Scene3DDisplayControl.Scene3D = value;
+                _classifierName = value;
+                UpdateLabel();
             }
         }
 
-        public string ClassifierName
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public TimeSpan Time
         {
+            get => _time;
             set
             {
-                TextLabel.Text = value;
+                _time = value;
+                UpdateLabel();
             }
         }
 
         public ResultTab()
         {
             InitializeComponent();
+        }
+
+        private void UpdateLabel()
+        {
+            ResultLabel.Text = $"The result was received by {ClassifierName} within {Time}";
         }
     }
 }

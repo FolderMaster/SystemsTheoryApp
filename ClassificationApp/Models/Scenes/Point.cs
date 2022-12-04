@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace ClassificationApp.Models.Scenes
@@ -10,6 +9,11 @@ namespace ClassificationApp.Models.Scenes
         public object Tag { get; set; } = null;
 
         public List<double> Coordinates { get; set; } = new List<double>();
+
+        public int AxisCount
+        {
+            get => Coordinates.Count;
+        }
 
         public Point()
         {
@@ -31,15 +35,19 @@ namespace ClassificationApp.Models.Scenes
             Coordinates = coordinates.ToList();
         }
 
+        public double this[int index]
+        {
+            get => Coordinates[index];
+            set => Coordinates[index] = value;
+        }
+
         public double GetDistance(Point point, IGraph schedule)
         {
             double result = 0;
-            for (int n = 0; n < point.Coordinates.Count || n < Coordinates.Count; ++n)
+            for (int n = 0; n < point.AxisCount || n < AxisCount; ++n)
             {
-                double coordinate1 = n < Coordinates.Count ? Coordinates[n] :
-                    schedule.DefaultValue;
-                double coordinate2 = n < point.Coordinates.Count ? point.Coordinates[n] :
-                    schedule.DefaultValue;
+                double coordinate1 = n < AxisCount ? this[n] : schedule.DefaultValue;
+                double coordinate2 = n < point.AxisCount ? point[n] : schedule.DefaultValue;
 
                 result += Math.Pow(coordinate2 - coordinate1, 2);
             }
@@ -49,10 +57,10 @@ namespace ClassificationApp.Models.Scenes
         public double GetDistance(Point point)
         {
             double result = 0;
-            for (int n = 0; n < point.Coordinates.Count && n < Coordinates.Count; ++n)
+            for (int n = 0; n < point.AxisCount && n < AxisCount; ++n)
             {
-                double coordinate1 = Coordinates[n];
-                double coordinate2 = point.Coordinates[n];
+                double coordinate1 = n < AxisCount ? this[n] : 0;
+                double coordinate2 = n < point.AxisCount ? point[n] : 0;
 
                 result += Math.Pow(coordinate2 - coordinate1, 2);
             }
@@ -64,9 +72,9 @@ namespace ClassificationApp.Models.Scenes
             List<double> coordinates = new List<double>();
             for (int n = 0; n < schedule.Axises.Count; ++n)
             {
-                if (n < Coordinates.Count)
+                if (n < AxisCount)
                 {
-                    coordinates.Add(schedule.Axises[n].Display(Coordinates[n]));
+                    coordinates.Add(schedule.Axises[n].Display(this[n]));
                 }
                 else
                 {
@@ -78,12 +86,12 @@ namespace ClassificationApp.Models.Scenes
 
         public double GetMax(IGraph schedule, int axisIndex)
         {
-            return axisIndex < Coordinates.Count ? Coordinates[axisIndex] : schedule.DefaultValue;
+            return axisIndex < AxisCount ? this[axisIndex] : schedule.DefaultValue;
         }
 
         public double GetMin(IGraph schedule, int axisIndex)
         {
-            return axisIndex < Coordinates.Count ? Coordinates[axisIndex] : schedule.DefaultValue;
+            return axisIndex < AxisCount ? this[axisIndex] : schedule.DefaultValue;
         }
 
         public override string ToString()
@@ -95,23 +103,22 @@ namespace ClassificationApp.Models.Scenes
         {
             if (obj is Point point)
             {
-                List<double> coordinates = point.Coordinates;
-                for (int n = 0; n < coordinates.Count && n < Coordinates.Count; ++n)
+                for (int n = 0; n < point.AxisCount && n < AxisCount; ++n)
                 {
-                    if (coordinates[n] < Coordinates[n])
+                    if (point[n] < this[n])
                     {
                         return 1;
                     }
-                    else if (coordinates[n] > Coordinates[n])
+                    else if (point[n] > this[n])
                     {
                         return -1;
                     }
                 }
-                if (coordinates.Count < Coordinates.Count)
+                if (point.AxisCount < AxisCount)
                 {
                     return 1;
                 }
-                else if (coordinates.Count < Coordinates.Count)
+                else if (point.AxisCount < AxisCount)
                 {
                     return -1;
                 }
@@ -129,9 +136,9 @@ namespace ClassificationApp.Models.Scenes
         public Point MoveByVector(Vector vector)
         {
             List<double> coordinates = new List<double>();
-            for (int n = 0; n < Coordinates.Count && n < vector.Coordinates.Count; ++n)
+            for (int n = 0; n < AxisCount && n < vector.AxisCount; ++n)
             {
-                coordinates.Add(Coordinates[n] + vector.Coordinates[n]);
+                coordinates.Add(this[n] + vector[n]);
             }
             return new Point(coordinates);
         }

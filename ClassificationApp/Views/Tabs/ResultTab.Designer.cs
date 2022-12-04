@@ -34,7 +34,6 @@
             this.DisplayGroupBox = new System.Windows.Forms.GroupBox();
             this.Scene3DDisplayControl = new ClassificationApp.Views.Controls.Scene3DDisplayControl();
             this.ResultLabel = new System.Windows.Forms.Label();
-            this.TextLabel = new System.Windows.Forms.Label();
             this.TableLayoutPanel.SuspendLayout();
             this.ResultGroupBox.SuspendLayout();
             this.DisplayGroupBox.SuspendLayout();
@@ -101,24 +100,14 @@
             this.ResultLabel.AutoSize = true;
             this.ResultLabel.Location = new System.Drawing.Point(-3, 0);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(134, 13);
+            this.ResultLabel.Size = new System.Drawing.Size(145, 13);
             this.ResultLabel.TabIndex = 8;
-            this.ResultLabel.Text = "The result was received by";
-            // 
-            // TextLabel
-            // 
-            this.TextLabel.AutoSize = true;
-            this.TextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TextLabel.Location = new System.Drawing.Point(137, 0);
-            this.TextLabel.Name = "TextLabel";
-            this.TextLabel.Size = new System.Drawing.Size(0, 13);
-            this.TextLabel.TabIndex = 9;
+            this.ResultLabel.Text = "The result received by  within";
             // 
             // ResultTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TextLabel);
             this.Controls.Add(this.ResultLabel);
             this.Controls.Add(this.TableLayoutPanel);
             this.Name = "ResultTab";
@@ -139,6 +128,5 @@
         private System.Windows.Forms.GroupBox DisplayGroupBox;
         private Controls.Scene3DDisplayControl Scene3DDisplayControl;
         private System.Windows.Forms.Label ResultLabel;
-        private System.Windows.Forms.Label TextLabel;
     }
 }

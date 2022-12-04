@@ -1,14 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-
+using System.Windows.Forms;
 using ClassificationApp.Models.Countries;
+using ClassificationApp.Services.Managers;
 
 namespace ClassificationApp.Models.Scenes
 {
     public class Camera3D : ICamera
     {
         private Scene3D _scene3D = null;
+
+        private double[,] _viewProjectionMatrix = new double[4, 4]
+        {
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0}
+        };
+
+        private double[,] _viewMatrix = new double[4, 4]
+        {
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0},
+            { 0, 0, 0, 0}
+        };
+
+        private double[,] _projectionMatrix = new double[4, 4]
+        {
+            { 1, 0, 0, 0},
+            { 0, 1, 0, 0},
+            { 0, 0, 1, 0},
+            { 0, 0, 0, 1}
+        };
+
+        private Point _point = new Point(new List<double>() { 0, 0, 0 });
+
+        private List<double> _rotation = new List<double>() { 0, 0, 0 };
+
+        private ProjectionMode _projectionMode = ProjectionMode.Perspective;
 
         public IScene Scene
         {
@@ -25,22 +56,44 @@ namespace ClassificationApp.Models.Scenes
                 }
             }
         }
+
+        public ProjectionMode ProjectionMode
+        {
+            get => _projectionMode;
+            set
+            {
+                _projectionMode = value;
+                UpdateProjectionMatrix();
+            }
+        }
         
         public Vector Vector { get; set; } = new Vector(new List<double>() { 1, 0, 0 });
 
-        public Point Point { get; set; } = new Point(new List<double>() { 0, 0, 0 });
+        public Point Point
+        {
+            get => _point;
+            set
+            {
+                _point = value;
+                UpdateViewMatrix();
+            }
+        }
 
-        public Camera3DSettings Settings { get; set; } = new Camera3DSettings();
+        public List<double> Rotation
+        {
+            get => _rotation;
+            set
+            {
+                _rotation = value;
+                UpdateViewMatrix();
+            }
+        }
 
-        public double Distance { get; set; } = 0;
+        public CameraDisplaySettings Settings { get; set; } = new CameraDisplaySettings();
 
         public int Width { get; set; } = 0;
 
-        double WidthAngle { get; set; } = 0;
-
         public int Height { get; set; } = 0;
-
-        double HeightAngle { get; set; } = 0;
 
         public bool IsTest { get; set; } = true;
 
@@ -118,16 +171,97 @@ namespace ClassificationApp.Models.Scenes
             Point = point;
         }
 
-        public Camera3D(Scene3D scene3D, Vector vector, Point point, int width, int height, double
-            widthAngle, double heightAngle)
+        public Camera3D(Scene3D scene3D, Vector vector, Point point, int width, int height)
         {
             Scene = scene3D;
             Vector = vector;
             Point = point;
             Width = width;
             Height = height;
-            WidthAngle = widthAngle;
-            HeightAngle = heightAngle;
+        }
+
+        private void UpdateViewMatrix()
+        {
+            double[,] xRotationMatrix = new double[4, 4]
+            {
+                { 1, 0, 0, 0},
+                { 0, Math.Cos(-Rotation[0]), -Math.Sin(-Rotation[0]), 0},
+                { 0, Math.Sin(-Rotation[0]), Math.Cos(-Rotation[0]), 0},
+                { 0, 0, 0, 1}
+            };
+
+            double[,] yRotationMatrix = new double[4, 4]
+            {
+                { Math.Cos(-Rotation[1]), 0, Math.Sin(-Rotation[1]), 0},
+                { 0, 1, 0, 0},
+                { -Math.Sin(-Rotation[1]), 0, Math.Cos(-Rotation[1]), 0},
+                { 0, 0, 0, 1}
+            };
+
+            double[,] zRotationMatrix = new double[4, 4]
+            {
+                { Math.Cos(-Rotation[2]), Math.Sin(-Rotation[2]), 0, 0},
+                { -Math.Sin(-Rotation[2]), Math.Cos(-Rotation[2]), 0, 0},
+                { 0, 0, 1, 0},
+                { 0, 0, 0, 1}
+            };
+
+            double[,] positionMatrix = new double[4, 4]
+            {
+                { 1, 0, 0, 0},
+                { 0, 1, 0, 0},
+                { 0, 0, 1, 0},
+                { -Point[0], -Point[1], -Point[2], 1}
+            };
+
+            _viewMatrix = MatrixManager.Multiply(zRotationMatrix, 
+                MatrixManager.Multiply(yRotationMatrix, 
+                MatrixManager.Multiply(xRotationMatrix, positionMatrix)));
+            UpdateViewProjectionMatrix();
+        }
+
+        private void UpdateProjectionMatrix()
+        {
+            double r;
+            double t;
+            double f;
+            double n;
+            switch(ProjectionMode)
+            {
+                case ProjectionMode.Ortographic:
+                    r = 2;
+                    t = 2;
+                    f = 100;
+                    n = 0.1;
+                    _projectionMatrix = new double[4, 4]
+                    {
+                        { 1 / r, 0, 0, 0 },
+                        { 0, 1 / t, 0, 0 },
+                        { 0, 0, -2 / (f - n), 0 },
+                        { 0, 0, (-f - n) / (f - n), 1 }
+                    };
+                    break;
+                case ProjectionMode.Perspective:
+                    r = 0.1;
+                    t = 0.1;
+                    f = 10;
+                    n = 0.1;
+                    _projectionMatrix = new double[4, 4]
+                    {
+                        { n / r, 0, 0, 0 },
+                        { 0, n / t, 0, 0 },
+                        { 0, 0, (-f - n) / (f - n), -1 },
+                        { 0, 0, -2 * f * n / (f - n), 0 }
+                    };
+                    break;
+                default: throw new ArgumentException();
+            }
+            UpdateViewProjectionMatrix();
+        }
+
+        private void UpdateViewProjectionMatrix()
+        {
+            _viewProjectionMatrix = MatrixManager.Multiply(_viewMatrix, _projectionMatrix);
         }
 
         private void DrawStrings(Graphics graphics, Font font, Brush brush, int x, int y, string[]
@@ -154,39 +288,16 @@ namespace ClassificationApp.Models.Scenes
 
         public Point GetDisplay(Point point)
         {
-            double xAngle = Vector.GetAngle(0);
-            double yAngle = Vector.GetAngle(1);
-            double zAngle = Vector.GetAngle(2);
-
-            double cx = Math.Cos(xAngle);
-            double cy = Math.Cos(yAngle);
-            double cz = Math.Cos(zAngle);
-
-            double sx = Math.Sin(xAngle);
-            double sy = Math.Sin(yAngle);
-            double sz = Math.Sin(zAngle);
-
-            double x = point.Coordinates[0] - Point.Coordinates[0];
-            double y = point.Coordinates[1] - Point.Coordinates[1];
-            double z = point.Coordinates[2] - Point.Coordinates[2];
-
-            double ex = Vector.Coordinates[0];
-            double ey = Vector.Coordinates[1];
-            double ez = Vector.Coordinates[2];
-
-            double dx = cy * (sz * y + cz * x) - sy * z;
-            double dy = sx * (cy * z + sy * (sz * y + cz * x)) + cx * (cz * y - sz * x);
-            double dz = cx * (cy * z + sy * (sz * y + cz * x)) - sx * (cz * y - sz * x);
-
-            double bx = ez / dz * dx + ex;
-            double by = ez / dz * dy + ey;
-
-            bx += Width / 2;
-            by += Height / 2;
-
-            if ((bx >= 0 && bx < Width) && (by >= 0 && by < Height))
+            double[,] coordinates = MatrixManager.Multiply(new double[4, 1]
             {
-                return new Point(point.Tag, new List<double>() { bx, by });
+                { point[0] },
+                { point[1] },
+                { point[2] },
+                { 1 }
+            }, _viewProjectionMatrix);
+            if (true)
+            {
+                return new Point(point.Tag, new List<double>() { coordinates[0, 0], coordinates[1, 0] });
             }
             else
             {

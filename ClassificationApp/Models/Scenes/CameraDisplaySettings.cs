@@ -2,7 +2,7 @@
 
 namespace ClassificationApp.Models.Scenes
 {
-    public class Camera3DSettings
+    public class CameraDisplaySettings
     {
         public int PointSize { get; set; } = 10;
 
@@ -22,11 +22,11 @@ namespace ClassificationApp.Models.Scenes
 
         public Brush DefaultBrush { get; set; } = new SolidBrush(Color.Gray);
 
-        public Camera3DSettings()
+        public CameraDisplaySettings()
         {
         }
 
-        public Camera3DSettings(int pointSize, Font font, Pen pointPen, Pen legendPen, Brush 
+        public CameraDisplaySettings(int pointSize, Font font, Pen pointPen, Pen legendPen, Brush 
             fontBrush, Brush noneBrush, Brush developedBrush, Brush developingBrush, Brush 
             defaultBrush)
         {

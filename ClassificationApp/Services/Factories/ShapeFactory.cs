@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using ClassificationApp.Models.Countries;
 using ClassificationApp.Models.Scenes;
@@ -22,7 +18,7 @@ namespace ClassificationApp.Services.Factories
             List<double> coordinates = new List<double>();
             foreach(Point point in points)
             {
-                for(int n = 0; n < point.Coordinates.Count; ++n)
+                for(int n = 0; n < point.AxisCount; ++n)
                 {
                     if(n >= coordinates.Count)
                     {
@@ -41,9 +37,9 @@ namespace ClassificationApp.Services.Factories
         public static Vector CreateVectorByPoints(Point point1, Point point2)
         {
             List<double> coordinates = new List<double>();
-            for(int n = 0; n < point1.Coordinates.Count && n < point2.Coordinates.Count; ++n)
+            for(int n = 0; n < point1.AxisCount && n < point2.AxisCount; ++n)
             {
-                coordinates.Add(point2.Coordinates[n] - point1.Coordinates[n]);
+                coordinates.Add(point2[n] - point1[n]);
             }
             return new Vector(coordinates);
         }
@@ -51,11 +47,10 @@ namespace ClassificationApp.Services.Factories
         public static Plane CreatePlaneByPoindAndVector(Point point, Vector vector)
         {
             Plane result = new Plane();
-            result.A = vector.Coordinates[0];
-            result.B = vector.Coordinates[1];
-            result.C = vector.Coordinates[2];
-            result.D = - vector.Coordinates[0] * point.Coordinates[0] - vector.Coordinates[1]
-                * point.Coordinates[1] - vector.Coordinates[2] * point.Coordinates[2];
+            result.A = vector[0];
+            result.B = vector[1];
+            result.C = vector[2];
+            result.D = - vector[0] * point[0] - vector[1] * point[1] - vector[2] * point[2];
             return result;
         }
     }

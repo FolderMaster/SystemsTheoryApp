@@ -30,8 +30,8 @@
         {
             this.TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.EducationGroupBox = new System.Windows.Forms.GroupBox();
-            this.TestGroupBox = new System.Windows.Forms.GroupBox();
             this.EductaionCountryGridControl = new ClassificationApp.Views.Controls.CountryGridControl();
+            this.TestGroupBox = new System.Windows.Forms.GroupBox();
             this.TestCountryGridControl = new ClassificationApp.Views.Controls.CountryGridControl();
             this.ClassifierControl = new ClassificationApp.Views.Controls.ClassifierControl();
             this.TableLayoutPanel.SuspendLayout();
@@ -52,7 +52,7 @@
             this.TableLayoutPanel.Location = new System.Drawing.Point(0, 31);
             this.TableLayoutPanel.Name = "TableLayoutPanel";
             this.TableLayoutPanel.RowCount = 1;
-            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutPanel.Size = new System.Drawing.Size(753, 524);
             this.TableLayoutPanel.TabIndex = 1;
             // 
@@ -67,6 +67,15 @@
             this.EducationGroupBox.TabStop = false;
             this.EducationGroupBox.Text = "Education";
             // 
+            // EductaionCountryGridControl
+            // 
+            this.EductaionCountryGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EductaionCountryGridControl.IsEditor = true;
+            this.EductaionCountryGridControl.Location = new System.Drawing.Point(3, 16);
+            this.EductaionCountryGridControl.Name = "EductaionCountryGridControl";
+            this.EductaionCountryGridControl.Size = new System.Drawing.Size(364, 499);
+            this.EductaionCountryGridControl.TabIndex = 3;
+            // 
             // TestGroupBox
             // 
             this.TestGroupBox.Controls.Add(this.TestCountryGridControl);
@@ -77,15 +86,6 @@
             this.TestGroupBox.TabIndex = 4;
             this.TestGroupBox.TabStop = false;
             this.TestGroupBox.Text = "Test";
-            // 
-            // EductaionCountryGridControl
-            // 
-            this.EductaionCountryGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EductaionCountryGridControl.IsEditor = true;
-            this.EductaionCountryGridControl.Location = new System.Drawing.Point(3, 16);
-            this.EductaionCountryGridControl.Name = "EductaionCountryGridControl";
-            this.EductaionCountryGridControl.Size = new System.Drawing.Size(364, 499);
-            this.EductaionCountryGridControl.TabIndex = 3;
             // 
             // TestCountryGridControl
             // 

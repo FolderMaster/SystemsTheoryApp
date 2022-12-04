@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassificationApp", "Classi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralizationApp", "GeneralizationApp\GeneralizationApp.csproj", "{A6FD1356-9BB9-4E08-A683-327DF32AB9CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemAnalysisMethodApp", "SystemAnalysisMethodApp\SystemAnalysisMethodApp.csproj", "{00833AF8-A468-4047-8C53-BB7D19363D33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A6FD1356-9BB9-4E08-A683-327DF32AB9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6FD1356-9BB9-4E08-A683-327DF32AB9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6FD1356-9BB9-4E08-A683-327DF32AB9CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00833AF8-A468-4047-8C53-BB7D19363D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00833AF8-A468-4047-8C53-BB7D19363D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00833AF8-A468-4047-8C53-BB7D19363D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00833AF8-A468-4047-8C53-BB7D19363D33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
