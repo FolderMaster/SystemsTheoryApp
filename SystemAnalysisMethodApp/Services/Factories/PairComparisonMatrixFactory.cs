@@ -76,7 +76,7 @@ namespace SystemAnalysisMethodApp.Services.Factories
         private static double ConvertToImportance(СharacterType reduced, СharacterType subtracted)
         {
             int result = reduced - subtracted;
-            return result >= 0 ? 1 / (double)(result + 1) : -result + 1;
+            return result >= 0 ? result + 1 : 1 / (double)(-result + 1);
         }
     }
 }
