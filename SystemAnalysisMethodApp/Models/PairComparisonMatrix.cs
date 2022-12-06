@@ -6,7 +6,17 @@ namespace SystemAnalysisMethodApp.Models
 {
     public class PairComparisonMatrix
     {
+        private static readonly double[] _randomConsistencyArray = new double [10] { 0, 0, 0.58, 
+            0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49 };
+
         private double[,] _matrix = new double[0, 0];
+
+        private string[] _names = new string[0];
+
+        public double RandomConsistency
+        {
+            get => _randomConsistencyArray[Count - 1];
+        }
 
         public double[,] Matrix
         {
@@ -15,6 +25,16 @@ namespace SystemAnalysisMethodApp.Models
             {
                 ValueValidator.AssertMatrixIsPairComparison(value, nameof(Matrix));
                 _matrix = value;
+            }
+        }
+
+        public string[] Names
+        {
+            get => _names.Length != Count ? new string[Count] : _names;
+            set
+            {
+                ValueValidator.AssertIsNotNull(value, nameof(Names));
+                _names = value;
             }
         }
 
@@ -36,19 +56,22 @@ namespace SystemAnalysisMethodApp.Models
             }
         }
 
-        public double ConsistencyRelation
+        public double Lmax
         {
             get
             {
                 double sum = 0;
                 for(int n = 0; n < Count; ++n)
                 {
-                    sum = GetSumOfColumn(n) * GetNormalizedVector(n);
+                    sum += GetMultiplyColumnSumAndNormalizedVector(n);
                 }
-
-                const double consistencyIndex = 1.24;
-                return (sum - Count) / (Count - 1) / consistencyIndex;
+                return sum;
             }
+        }
+
+        public double ConsistencyRelation
+        {
+            get => (Lmax - Count) / (Count - 1) / RandomConsistency;
         }
 
         public bool IsRevisionNeeded
@@ -60,9 +83,10 @@ namespace SystemAnalysisMethodApp.Models
         {
         }
 
-        public PairComparisonMatrix(double[,] matrix)
+        public PairComparisonMatrix(double[,] matrix, string[] names)
         {
             Matrix = matrix;
+            Names = names;
         }
 
         public double GetOwnVector(int index)
@@ -80,7 +104,7 @@ namespace SystemAnalysisMethodApp.Models
             return GetOwnVector(index) / SumOwnVectors;
         }
 
-        public double GetSumOfColumn(int index)
+        public double GetColumnSum(int index)
         {
             double sum = 0;
             for(int y = 0; y < Count; ++y)
@@ -88,6 +112,11 @@ namespace SystemAnalysisMethodApp.Models
                 sum += Matrix[y, index];
             }
             return sum;
+        }
+
+        public double GetMultiplyColumnSumAndNormalizedVector(int index)
+        {
+            return GetColumnSum(index) * GetNormalizedVector(index);
         }
     }
 }

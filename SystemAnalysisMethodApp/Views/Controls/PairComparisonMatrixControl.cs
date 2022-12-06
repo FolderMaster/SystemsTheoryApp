@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SystemAnalysisMethodApp.Models;
+using SystemAnalysisMethodApp.Views.Forms;
 
 namespace SystemAnalysisMethodApp.Views.Controls
 {
@@ -23,16 +18,18 @@ namespace SystemAnalysisMethodApp.Views.Controls
             set
             {
                 _pairComparisonMatrix = value;
-                DoubleMatrixGridControl.Matrix = value.Matrix;
+                PairComparisonMatrixGridControl.Matrix = value.Matrix;
+                PairComparisonMatrixGridControl.Names = value.Names;
             }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string[] Names
+        public bool IsRevisionNeeded
         {
-            get => DoubleMatrixGridControl.Names;
-            set => DoubleMatrixGridControl.Names = value;
+            get => _pairComparisonMatrix.IsRevisionNeeded;
         }
+
+        public event EventHandler PairComparisonMatrixChanged;
 
         public PairComparisonMatrixControl()
         {
@@ -41,8 +38,17 @@ namespace SystemAnalysisMethodApp.Views.Controls
 
         private void DoubleMatrixGridControl_MatrixChanged(object sender, EventArgs e)
         {
-            string text = PairComparisonMatrix.IsRevisionNeeded ? $"Revision needed" : $"No revision needed";
+            string text = PairComparisonMatrix.IsRevisionNeeded ? "Revision needed" : 
+                "No revision needed";
             Label.Text = text;
+            PairComparisonMatrixChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CalculationButton_Click(object sender, EventArgs e)
+        {
+            PairComparisonCalculationForm form = new PairComparisonCalculationForm();
+            form.PairComparisonMatrix = PairComparisonMatrix;
+            form.Show();
         }
     }
 }

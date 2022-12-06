@@ -8,8 +8,8 @@ namespace SystemAnalysisMethodApp.Services.App
     {
         public List<Country> Countries { get; set; } = new List<Country>();
 
-        public PairComparisonMatrix PairComparisonMatrix { get; set; } = new 
-            PairComparisonMatrix(new double[6, 6]
+        public PairComparisonMatrix PairComparisonMatrix { get; set; } = new PairComparisonMatrix(
+            new double[6, 6]
             {
                 {1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1},
@@ -17,6 +17,15 @@ namespace SystemAnalysisMethodApp.Services.App
                 {1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1}
+            },
+            new string[6]
+            {
+                nameof(Country.AverageLivingCost),
+                nameof(Country.TripPrice),
+                nameof(Country.AttractionCount),
+                nameof(Country.Climate),
+                nameof(Country.DevelopmentLevel),
+                nameof(Country.TouristPopularity)
             });
 
         public Session()

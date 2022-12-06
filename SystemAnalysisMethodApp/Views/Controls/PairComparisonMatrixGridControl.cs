@@ -7,13 +7,13 @@ using SystemAnalysisMethodApp.Services.Validators;
 
 namespace SystemAnalysisMethodApp.Views.Controls
 {
-    public partial class DoubleMatrixGridControl : UserControl
+    public partial class PairComparisonMatrixGridControl : UserControl
     {
         private double[,] _matrix = new double[0, 0];
 
         private string[] _names = new string[0];
 
-        private DataTable _dataTable = CreateDataTable(0, null);
+        private DataTable _dataTable = CreateDataTable(0, new string[0]);
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] Matrix
@@ -35,6 +35,7 @@ namespace SystemAnalysisMethodApp.Views.Controls
             get => _names;
             set
             {
+                ValueValidator.AssertIsNotNull(value, nameof(Names));
                 _names = value;
                 _dataTable = CreateDataTable(Count, Names);
                 UpdateDataTable();
@@ -49,7 +50,7 @@ namespace SystemAnalysisMethodApp.Views.Controls
 
         public event EventHandler MatrixChanged;
 
-        public DoubleMatrixGridControl()
+        public PairComparisonMatrixGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
@@ -58,13 +59,9 @@ namespace SystemAnalysisMethodApp.Views.Controls
         private static DataTable CreateDataTable(int count, string[] names)
         {
             DataTable dataTable = new DataTable();
-            if(count != 0)
+            if (names.Length != count)
             {
-                ValueValidator.AssertIsNotNull(names, nameof(names));
-                if (names.Length != count)
-                {
-                    names = new string[count];
-                }
+                names = new string[count];
             }
 
             dataTable.Columns.Add("*", typeof(string));

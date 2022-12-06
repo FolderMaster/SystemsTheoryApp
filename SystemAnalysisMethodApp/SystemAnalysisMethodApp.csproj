@@ -50,12 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\ObjectCriteriaTable.cs" />
     <Compile Include="Models\PairComparisonMatrix.cs" />
     <Compile Include="Models\СharacterType.cs" />
     <Compile Include="Services\App\SaveFormat.cs" />
     <Compile Include="Services\App\Session.cs" />
     <Compile Include="Services\App\Settings.cs" />
+    <Compile Include="Services\Factories\ObjectCriteriaTableFactory.cs" />
+    <Compile Include="Services\Factories\PairComparisonMatrixFactory.cs" />
     <Compile Include="Services\IO\JsonManager.cs" />
+    <Compile Include="Services\Rollupers\ObjectCriteriaTableRolluper.cs" />
     <Compile Include="Services\Validators\ValueValidator.cs" />
     <Compile Include="Views\ColorManager.cs" />
     <Compile Include="Views\Controls\CountryGridControl.cs">
@@ -64,17 +68,23 @@
     <Compile Include="Views\Controls\CountryGridControl.Designer.cs">
       <DependentUpon>CountryGridControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\DoubleMatrixGridControl.cs">
+    <Compile Include="Views\Controls\PairComparisonMatrixGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Controls\DoubleMatrixGridControl.Designer.cs">
-      <DependentUpon>DoubleMatrixGridControl.cs</DependentUpon>
+    <Compile Include="Views\Controls\PairComparisonMatrixGridControl.Designer.cs">
+      <DependentUpon>PairComparisonMatrixGridControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\PairComparisonMatrixControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Controls\PairComparisonMatrixControl.Designer.cs">
       <DependentUpon>PairComparisonMatrixControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\FinalResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\FinalResultForm.Designer.cs">
+      <DependentUpon>FinalResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -84,12 +94,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Forms\PairComparisonCalculationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\PairComparisonCalculationForm.Designer.cs">
+      <DependentUpon>PairComparisonCalculationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\PairComparisonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\PairComparisonForm.Designer.cs">
+      <DependentUpon>PairComparisonForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageBoxManager.cs" />
+    <Compile Include="Views\Tabs\FinalResultTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\FinalResultTab.Designer.cs">
+      <DependentUpon>FinalResultTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tabs\MainTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Tabs\MainTab.Designer.cs">
       <DependentUpon>MainTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\PairComparisonCalculationTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\PairComparisonCalculationTab.Designer.cs">
+      <DependentUpon>PairComparisonCalculationTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\PairComparisonTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\PairComparisonTab.Designer.cs">
+      <DependentUpon>PairComparisonTab.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,17 +143,35 @@
     <EmbeddedResource Include="Views\Controls\CountryGridControl.resx">
       <DependentUpon>CountryGridControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Controls\DoubleMatrixGridControl.resx">
-      <DependentUpon>DoubleMatrixGridControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Controls\PairComparisonMatrixGridControl.resx">
+      <DependentUpon>PairComparisonMatrixGridControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Controls\PairComparisonMatrixControl.resx">
       <DependentUpon>PairComparisonMatrixControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\FinalResultForm.resx">
+      <DependentUpon>FinalResultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\PairComparisonCalculationForm.resx">
+      <DependentUpon>PairComparisonCalculationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\PairComparisonForm.resx">
+      <DependentUpon>PairComparisonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\FinalResultTab.resx">
+      <DependentUpon>FinalResultTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Tabs\MainTab.resx">
       <DependentUpon>MainTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\PairComparisonCalculationTab.resx">
+      <DependentUpon>PairComparisonCalculationTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\PairComparisonTab.resx">
+      <DependentUpon>PairComparisonTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
