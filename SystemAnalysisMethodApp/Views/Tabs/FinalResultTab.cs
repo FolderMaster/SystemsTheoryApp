@@ -60,8 +60,23 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             }
             DataGridView.Rows[maxGlobalPriorityIndex].DefaultCellStyle.BackColor =
                 ColorManager.AnswerColor;
+            ResizeDataGridView();
 
             Label.Text = $"Best alternative: {table.AlternativeNames[maxGlobalPriorityIndex]}";
+        }
+
+        private void ResizeDataGridView()
+        {
+            foreach (DataGridViewRow row in DataGridView.Rows)
+            {
+                row.Height = (DataGridView.ClientRectangle.Height -
+                    DataGridView.ColumnHeadersHeight) / DataGridView.Rows.Count;
+            }
+        }
+
+        private void DataGridView_SizeChanged(object sender, EventArgs e)
+        {
+            ResizeDataGridView();
         }
     }
 }

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADEFB0FD-7AA7-456F-9D91-15DFCFF0E02C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DecisionUnderUncertaintyApp</RootNamespace>
+    <AssemblyName>DecisionUnderUncertaintyApp</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\OptionsEnvironmentsTable.cs" />
+    <Compile Include="Services\App\SaveFormat.cs" />
+    <Compile Include="Services\App\Session.cs" />
+    <Compile Include="Services\App\Settings.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\HurwitzCriterion.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\IDecissionSearchСriterion.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\LaplaceCriterion.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\MaximumCriterion.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\SavageCriterion.cs" />
+    <Compile Include="Services\DecissionSearchСriterion\WaldCriterion.cs" />
+    <Compile Include="Services\IO\JsonManager.cs" />
+    <Compile Include="Services\Managers\MatrixManager.cs" />
+    <Compile Include="Services\Validators\ValueValidator.cs" />
+    <Compile Include="Views\ColorManager.cs" />
+    <Compile Include="Views\Controls\ArrayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\ArrayControl.Designer.cs">
+      <DependentUpon>ArrayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\CriterionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\CriterionControl.Designer.cs">
+      <DependentUpon>CriterionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\DoubleArrayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\DoubleArrayControl.Designer.cs">
+      <DependentUpon>DoubleArrayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageBoxManager.cs" />
+    <Compile Include="Views\Tabs\ResultTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\ResultTab.Designer.cs">
+      <DependentUpon>ResultTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\СriterionType.cs" />
+    <Compile Include="Views\Controls\СriterionTypeSelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\СriterionTypeSelectorControl.Designer.cs">
+      <DependentUpon>СriterionTypeSelectorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\DoubleMatrixControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\DoubleMatrixControl.Designer.cs">
+      <DependentUpon>DoubleMatrixControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\OptionsEnvironmentsTableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\OptionsEnvironmentsTableControl.Designer.cs">
+      <DependentUpon>OptionsEnvironmentsTableControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MatrixControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\MatrixControl.Designer.cs">
+      <DependentUpon>MatrixControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Controls\SelectorControl.Designer.cs">
+      <DependentUpon>SelectorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Tabs\MainTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tabs\MainTab.Designer.cs">
+      <DependentUpon>MainTab.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Controls\ArrayControl.resx">
+      <DependentUpon>ArrayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Controls\CriterionControl.resx">
+      <DependentUpon>CriterionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Controls\OptionsEnvironmentsTableControl.resx">
+      <DependentUpon>OptionsEnvironmentsTableControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Controls\MatrixControl.resx">
+      <DependentUpon>MatrixControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Controls\SelectorControl.resx">
+      <DependentUpon>SelectorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Forms\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\MainTab.resx">
+      <DependentUpon>MainTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\ResultTab.resx">
+      <DependentUpon>ResultTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

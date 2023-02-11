@@ -26,6 +26,7 @@ namespace SystemAnalysisMethodApp.Views.Controls
                 MatrixChanged?.Invoke(this, EventArgs.Empty);
                 _dataTable = CreateDataTable(Count, Names);
                 UpdateDataTable();
+                ResizeDataGridView();
             }
         }
 
@@ -39,6 +40,7 @@ namespace SystemAnalysisMethodApp.Views.Controls
                 _names = value;
                 _dataTable = CreateDataTable(Count, Names);
                 UpdateDataTable();
+                ResizeDataGridView();
             }
         }
 
@@ -94,6 +96,15 @@ namespace SystemAnalysisMethodApp.Views.Controls
             DataGridView.DataSource = _dataTable;
         }
 
+        private void ResizeDataGridView()
+        {
+            foreach (DataGridViewRow row in DataGridView.Rows)
+            {
+                row.Height = (DataGridView.ClientRectangle.Height -
+                    DataGridView.ColumnHeadersHeight) / DataGridView.Rows.Count;
+            }
+        }
+
         private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             int rowIndex = e.RowIndex;
@@ -127,6 +138,16 @@ namespace SystemAnalysisMethodApp.Views.Controls
             string stringValue = value == null ? "" : value.ToString();
             Matrix[rowIndex, columnIndex - 1] = double.Parse(stringValue);
             MatrixChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void DataGridView_SizeChanged(object sender, EventArgs e)
+        {
+            ResizeDataGridView();
+        }
+
+        private void PairComparisonMatrixGridControl_Load(object sender, EventArgs e)
+        {
+            ResizeDataGridView();
         }
     }
 }

@@ -8,10 +8,10 @@ namespace ClassificationApp.Services.Managers
         {
             ValueValidator.AssertMatricesAreCompatible(matrix1, nameof(matrix1), matrix2, 
                 nameof(matrix2));
-            int count = matrix1.GetLength(0);
-            int length = matrix1.GetLength(1);
-            int height = matrix2.GetLength(0);
-            double[,] result = new double[length, height];
+            int count = matrix1.GetLength(1);
+            int length = matrix2.GetLength(1);
+            int height = matrix1.GetLength(0);
+            double[,] result = new double[height, length];
             for (int y = 0; y < height; ++y)
             {
                 for (int x = 0; x < length; ++x)

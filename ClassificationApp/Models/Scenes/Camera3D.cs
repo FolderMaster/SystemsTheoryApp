@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using ClassificationApp.Models.Countries;
+using ClassificationApp.Services.Factories;
 using ClassificationApp.Services.Managers;
 
 namespace ClassificationApp.Models.Scenes
@@ -39,6 +39,12 @@ namespace ClassificationApp.Models.Scenes
 
         private List<double> _rotation = new List<double>() { 0, 0, 0 };
 
+        private int _width = 0;
+
+        private int _height = 0;
+
+        private double _depth = 100;
+
         private ProjectionMode _projectionMode = ProjectionMode.Perspective;
 
         public IScene Scene
@@ -60,11 +66,7 @@ namespace ClassificationApp.Models.Scenes
         public ProjectionMode ProjectionMode
         {
             get => _projectionMode;
-            set
-            {
-                _projectionMode = value;
-                UpdateProjectionMatrix();
-            }
+            set => _projectionMode = value;
         }
         
         public Vector Vector { get; set; } = new Vector(new List<double>() { 1, 0, 0 });
@@ -91,9 +93,35 @@ namespace ClassificationApp.Models.Scenes
 
         public CameraDisplaySettings Settings { get; set; } = new CameraDisplaySettings();
 
-        public int Width { get; set; } = 0;
+        public int Width
+        {
+            get => _width;
+            set
+            {
+                _width = value;
+                UpdateProjectionMatrix();
+            }
+        }
 
-        public int Height { get; set; } = 0;
+        public int Height
+        {
+            get => _height;
+            set
+            {
+                _height = value;
+                UpdateProjectionMatrix();
+            }
+        }
+
+        public double Depth
+        {
+            get => _depth;
+            set
+            {
+                _depth = value;
+                UpdateProjectionMatrix();
+            }
+        }
 
         public bool IsTest { get; set; } = true;
 
@@ -115,8 +143,8 @@ namespace ClassificationApp.Models.Scenes
                         point = GetDisplay(point);
                         if(point != null)
                         {
-                            int x = (int)point.Coordinates[0];
-                            int y = (int)point.Coordinates[1];
+                            int x = (int)point.Coordinates[0] + Width / 2;
+                            int y = (int)point.Coordinates[1] + Height / 2;
                             Brush pointBrush;
                             switch(point.Tag)
                             {
@@ -132,22 +160,40 @@ namespace ClassificationApp.Models.Scenes
                                 Settings.PointSize / 2, Settings.PointSize, Settings.PointSize);
                         }
                     }
+                    else if(shape is LineSegment lineSegment)
+                    {
+                        lineSegment = GetDisplay(lineSegment);
+                        if(lineSegment != null)
+                        {
+                            int x1 = (int)lineSegment.Begin[0] + Width / 2;
+                            int y1 = (int)lineSegment.Begin[1] + Height / 2;
+                            int x2 = (int)lineSegment.End[0] + Width / 2;
+                            int y2 = (int)lineSegment.End[1] + Height / 2;
+
+                            graphics.DrawLine(Settings.PointPen, x1, y1, x2, y2);
+                        }
+                    }
                 }
                 if(IsTest)
                 {
-                    DrawStrings(graphics, Settings.Font, Settings.FontBrush, 0, 0, new string[] { "Camera",
-                        "Width:" + Width,
-                        "Heighth:" + Height,
-                        "Vector",
-                        "x:" + Vector.Coordinates[0].ToString(),
-                        "y:" + Vector.Coordinates[1].ToString(),
-                        "z:" + Vector.Coordinates[2].ToString(),
+                    DrawStrings(graphics, Settings.Font, Settings.FontBrush, 0, 0, new string[]
+                    {
+                        "Camera",
                         "Point",
-                        "x:" + Point.Coordinates[0].ToString(),
-                        "y:" + Point.Coordinates[1].ToString(),
-                        "z:" + Point.Coordinates[2].ToString()});
+                        "x:" + Point[0].ToString(),
+                        "y:" + Point[1].ToString(),
+                        "z:" + Point[2].ToString(),
+                        "Rotation",
+                        "x:" + Rotation[0].ToString(),
+                        "y:" + Rotation[1].ToString(),
+                        "z:" + Rotation[2].ToString(),
+                        "Projection:" + ProjectionMode.ToString(),
+                        "Width:" + Width.ToString(),
+                        "Height:" + Height.ToString(),
+                        "Depth:" + Depth.ToString()
+                    });
                 }
-                DrawLegend(graphics, Settings.Font, Settings.LegendPen, Settings.FontBrush, 0, 240,
+                DrawLegend(graphics, Settings.Font, Settings.LegendPen, Settings.FontBrush, 0, 300,
                     20, new Brush[] { Settings.NoneBrush,  Settings.DevelopedBrush, 
                         Settings.DevelopingBrush, Settings.DefaultBrush }, new string[] 
                         { " - none", " - developed", " - developing", " - default"});
@@ -222,40 +268,13 @@ namespace ClassificationApp.Models.Scenes
 
         private void UpdateProjectionMatrix()
         {
-            double r;
-            double t;
-            double f;
-            double n;
-            switch(ProjectionMode)
+            _projectionMatrix = new double[4, 4]
             {
-                case ProjectionMode.Ortographic:
-                    r = 2;
-                    t = 2;
-                    f = 100;
-                    n = 0.1;
-                    _projectionMatrix = new double[4, 4]
-                    {
-                        { 1 / r, 0, 0, 0 },
-                        { 0, 1 / t, 0, 0 },
-                        { 0, 0, -2 / (f - n), 0 },
-                        { 0, 0, (-f - n) / (f - n), 1 }
-                    };
-                    break;
-                case ProjectionMode.Perspective:
-                    r = 0.1;
-                    t = 0.1;
-                    f = 10;
-                    n = 0.1;
-                    _projectionMatrix = new double[4, 4]
-                    {
-                        { n / r, 0, 0, 0 },
-                        { 0, n / t, 0, 0 },
-                        { 0, 0, (-f - n) / (f - n), -1 },
-                        { 0, 0, -2 * f * n / (f - n), 0 }
-                    };
-                    break;
-                default: throw new ArgumentException();
-            }
+                { Width / 2, 0, 0, 0 },
+                { 0, Height / 2, 0, 0 },
+                { 0, 0, Depth / 2, 0 },
+                { -1, 1, 0, 1 }
+            };
             UpdateViewProjectionMatrix();
         }
 
@@ -288,21 +307,21 @@ namespace ClassificationApp.Models.Scenes
 
         public Point GetDisplay(Point point)
         {
-            double[,] coordinates = MatrixManager.Multiply(new double[4, 1]
+            double[,] coordinates = MatrixManager.Multiply(_viewProjectionMatrix,
+                new double[4, 1]
+                {
+                    { point[0] },
+                    { point[1] },
+                    { point[2] },
+                    { 1 }
+                });
+            if(ProjectionMode == ProjectionMode.Perspective)
             {
-                { point[0] },
-                { point[1] },
-                { point[2] },
-                { 1 }
-            }, _viewProjectionMatrix);
-            if (true)
-            {
-                return new Point(point.Tag, new List<double>() { coordinates[0, 0], coordinates[1, 0] });
+                double zToDivideBy = 1 + coordinates[2, 0];
+                coordinates[0, 0] /= zToDivideBy;
+                coordinates[1, 0] /= zToDivideBy;
             }
-            else
-            {
-                return null;
-            }
+            return new Point(point.Tag, new List<double>() { coordinates[0, 0], coordinates[1, 0] });
         }
 
         public LineSegment GetDisplay(LineSegment lineSegment)
@@ -324,19 +343,39 @@ namespace ClassificationApp.Models.Scenes
             return new Polygon(plane.Tag);
         }
 
-        public void RotateHorizontally(double angle)
+        public void RotateOX(double angle)
         {
-            Vector = Vector.RotateByAngleOx(angle);
+            Rotation = new List<double>()
+            {
+                Rotation[0] + angle,
+                Rotation[1],
+                Rotation[2]
+            };
         }
 
-        public void RotateVertically(double angle)
+        public void RotateOY(double angle)
         {
-            Vector = Vector.RotateByAngleOy(angle);
+            Rotation = new List<double>()
+            {
+                Rotation[0],
+                Rotation[1] + angle,
+                Rotation[2]
+            };
+        }
+
+        public void RotateOZ(double angle)
+        {
+            Rotation = new List<double>()
+            {
+                Rotation[0],
+                Rotation[1],
+                Rotation[2] + angle
+            };
         }
 
         public void Go(double stepsAmount)
         {
-            Point = Point.MoveByVector(stepsAmount * Vector.Ort);
+            Point = Point.MoveByVector(stepsAmount * ShapeFactory.CreateOrtByAngles(Rotation));
         }
     }
 }

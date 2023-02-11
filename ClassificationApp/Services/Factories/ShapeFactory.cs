@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ClassificationApp.Models.Countries;
 using ClassificationApp.Models.Scenes;
 
@@ -51,6 +52,26 @@ namespace ClassificationApp.Services.Factories
             result.B = vector[1];
             result.C = vector[2];
             result.D = - vector[0] * point[0] - vector[1] * point[1] - vector[2] * point[2];
+            return result;
+        }
+
+        public static Vector CreateOrtByAngles(List<double> angles)
+        {
+            Vector result = new Vector();
+            double angleSum = Math.Abs(angles[0]) + Math.Abs(angles[1]) + Math.Abs(angles[2]);
+            if(angleSum != 0)
+            {
+                result.Coordinates = new List<double>
+                {
+                    angles[0] / angleSum,
+                    angles[1] / angleSum,
+                    angles[2] / angleSum
+                };
+            }
+            else
+            {
+                result.Coordinates = new List<double> { 1, 1, 1 };
+            }
             return result;
         }
     }

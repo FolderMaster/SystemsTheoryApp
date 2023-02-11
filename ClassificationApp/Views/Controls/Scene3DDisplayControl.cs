@@ -49,24 +49,34 @@ namespace ClassificationApp.Views.Controls
             Scene3D = new Scene3D();
         }
 
-        private void RotateRight()
+        private void RotateOX()
         {
-            Camera3D.RotateHorizontally(_defaultAngle);
+            Camera3D.RotateOX(_defaultAngle);
         }
 
-        private void RotateLeft()
+        private void ReverseRotateOX()
         {
-            Camera3D.RotateHorizontally(-_defaultAngle);
+            Camera3D.RotateOX(-_defaultAngle);
         }
 
-        private void RotateUp()
+        private void RotateOY()
         {
-            Camera3D.RotateVertically(_defaultAngle);
+            Camera3D.RotateOY(_defaultAngle);
         }
 
-        private void RotateDown()
+        private void ReverseRotateOY()
         {
-            Camera3D.RotateVertically(-_defaultAngle);
+            Camera3D.RotateOY(-_defaultAngle);
+        }
+
+        private void RotateOZ()
+        {
+            Camera3D.RotateOZ(_defaultAngle);
+        }
+
+        private void ReverseRotateOZ()
+        {
+            Camera3D.RotateOZ(-_defaultAngle);
         }
 
         private void GoAhead()
@@ -91,12 +101,14 @@ namespace ClassificationApp.Views.Controls
         {
             switch (e.KeyChar)
             {
+                case 'q': case 'Q': ReverseRotateOX(); break;
                 case 'w': case 'W': GoAhead(); break;
+                case 'e': case 'E': RotateOX(); break;
+                case 'a': case 'A': ReverseRotateOY(); break;
                 case 's': case 'S': GoBack(); break;
-                case 'a': case 'A': RotateLeft(); break;
-                case 'd': case 'D': RotateRight(); break;
-                case 'q': case 'Q': RotateDown(); break;
-                case 'e': case 'E': RotateUp(); break;
+                case 'd': case 'D': RotateOY(); break;
+                case 'z': case 'Z': ReverseRotateOZ(); break;
+                case 'x': case 'X': RotateOZ(); break;
             }
 
             Invalidate();
