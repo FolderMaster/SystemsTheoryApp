@@ -8,8 +8,14 @@ using ClassificationApp.Models.Scenes;
 
 namespace ClassificationApp.Views.Forms
 {
+    /// <summary>
+    /// Окно для отображение результатов классифицирования.
+    /// </summary>
     public partial class ResultForm : Form
     {
+        /// <summary>
+        /// Возращает и задаёт список стран.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Countries
         {
@@ -17,6 +23,9 @@ namespace ClassificationApp.Views.Forms
             set => ResultTab.Result = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт трёхмерную сцену.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Scene3D Scene3D
         {
@@ -24,6 +33,9 @@ namespace ClassificationApp.Views.Forms
             set => ResultTab.Scene3D = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт наименование классификатора.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ClassifierName
         {
@@ -31,6 +43,9 @@ namespace ClassificationApp.Views.Forms
             set => ResultTab.ClassifierName = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт время процесса классифицирования.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan Time
         {
@@ -38,6 +53,9 @@ namespace ClassificationApp.Views.Forms
             set => ResultTab.Time = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ResultForm"/> по умолчанию.
+        /// </summary>
         public ResultForm()
         {
             InitializeComponent();

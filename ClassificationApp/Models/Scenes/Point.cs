@@ -4,43 +4,79 @@ using System.Linq;
 
 namespace ClassificationApp.Models.Scenes
 {
+    /// <summary>
+    /// Класс точки с координатами.
+    /// </summary>
     public class Point : IShape, IComparable
     {
         public object Tag { get; set; } = null;
 
+        /// <summary>
+        /// Возращает и задаёт координаты.
+        /// </summary>
         public List<double> Coordinates { get; set; } = new List<double>();
 
+        /// <summary>
+        /// Возращает количество осей.
+        /// </summary>
         public int AxisCount
         {
             get => Coordinates.Count;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Point"/> по умолчанию.
+        /// </summary>
         public Point()
         {
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Point"/>.
+        /// </summary>
+        /// <param name="tag">Тег.</param>
         public Point(object tag)
         {
             Tag = tag;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Point"/>.
+        /// </summary>
+        /// <param name="coordinates">Координаты.</param>
         public Point(IEnumerable<double> coordinates)
         {
             Coordinates = coordinates.ToList();
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Point"/>.
+        /// </summary>
+        /// <param name="tag">Тег.</param>
+        /// <param name="coordinates">Координаты.</param>
         public Point(object tag, IEnumerable<double> coordinates)
         {
             Tag = tag;
             Coordinates = coordinates.ToList();
         }
 
+        /// <summary>
+        /// Возращает и задаёт координату.
+        /// </summary>
+        /// <param name="index">Индекс оси.</param>
+        /// <returns>Координата по индексу оси.</returns>
         public double this[int index]
         {
             get => Coordinates[index];
             set => Coordinates[index] = value;
         }
 
+        /// <summary>
+        /// Рассчитывает расстояние между точками.
+        /// </summary>
+        /// <param name="point">Точка.</param>
+        /// <param name="schedule">График.</param>
+        /// <returns>Расстояние между точками.</returns>
         public double GetDistance(Point point, IGraph schedule)
         {
             double result = 0;
@@ -54,6 +90,11 @@ namespace ClassificationApp.Models.Scenes
             return Math.Sqrt(result);
         }
 
+        /// <summary>
+        /// Рассчитывает расстояние между точками.
+        /// </summary>
+        /// <param name="point">Точка.</param>
+        /// <returns>Расстояние между точками.</returns>
         public double GetDistance(Point point)
         {
             double result = 0;
@@ -133,6 +174,11 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Перемещает точку вектором.
+        /// </summary>
+        /// <param name="vector">Вектор.</param>
+        /// <returns>Точка, перемещённая по вектору.</returns>
         public Point MoveByVector(Vector vector)
         {
             List<double> coordinates = new List<double>();

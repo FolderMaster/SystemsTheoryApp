@@ -7,10 +7,19 @@ using ClassificationApp.Services.Managers;
 
 namespace ClassificationApp.Models.Scenes
 {
+    /// <summary>
+    /// Класс трёхмерной камеры.
+    /// </summary>
     public class Camera3D : ICamera
     {
+        /// <summary>
+        /// Трёхмерная сцена.
+        /// </summary>
         private Scene3D _scene3D = null;
 
+        /// <summary>
+        /// Матрица представления-проекции.
+        /// </summary>
         private double[,] _viewProjectionMatrix = new double[4, 4]
         {
             { 0, 0, 0, 0},
@@ -19,6 +28,9 @@ namespace ClassificationApp.Models.Scenes
             { 0, 0, 0, 0}
         };
 
+        /// <summary>
+        /// Матрица представления.
+        /// </summary>
         private double[,] _viewMatrix = new double[4, 4]
         {
             { 0, 0, 0, 0},
@@ -27,6 +39,9 @@ namespace ClassificationApp.Models.Scenes
             { 0, 0, 0, 0}
         };
 
+        /// <summary>
+        /// Матрица проекции.
+        /// </summary>
         private double[,] _projectionMatrix = new double[4, 4]
         {
             { 1, 0, 0, 0},
@@ -35,18 +50,39 @@ namespace ClassificationApp.Models.Scenes
             { 0, 0, 0, 1}
         };
 
+        /// <summary>
+        /// Точка камеры.
+        /// </summary>
         private Point _point = new Point(new List<double>() { 0, 0, 0 });
 
+        /// <summary>
+        /// Поворот камеры.
+        /// </summary>
         private List<double> _rotation = new List<double>() { 0, 0, 0 };
 
+        /// <summary>
+        /// Длина проекционной плоскости.
+        /// </summary>
         private int _width = 0;
 
+        /// <summary>
+        /// Длина высота плоскости.
+        /// </summary>
         private int _height = 0;
 
+        /// <summary>
+        /// Глубина проекционной плоскости.
+        /// </summary>
         private double _depth = 100;
 
+        /// <summary>
+        /// Режим отображения.
+        /// </summary>
         private ProjectionMode _projectionMode = ProjectionMode.Perspective;
 
+        /// <summary>
+        /// Возращает и задает интерфейс сцены. Сцена должна быть трёхмерной.
+        /// </summary>
         public IScene Scene
         {
             get => _scene3D;
@@ -63,14 +99,23 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает режим отображения.
+        /// </summary>
         public ProjectionMode ProjectionMode
         {
             get => _projectionMode;
             set => _projectionMode = value;
         }
-        
+
+        /// <summary>
+        /// Возращает и задает вектор направления камеры.
+        /// </summary>
         public Vector Vector { get; set; } = new Vector(new List<double>() { 1, 0, 0 });
 
+        /// <summary>
+        /// Возращает и задает точку камеры.
+        /// </summary>
         public Point Point
         {
             get => _point;
@@ -81,6 +126,9 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает поворот камеры.
+        /// </summary>
         public List<double> Rotation
         {
             get => _rotation;
@@ -91,8 +139,14 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает настройки камеры.
+        /// </summary>
         public CameraDisplaySettings Settings { get; set; } = new CameraDisplaySettings();
 
+        /// <summary>
+        /// Возращает и задает длину проекционной плоскости.
+        /// </summary>
         public int Width
         {
             get => _width;
@@ -103,6 +157,9 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает высоту проекционной плоскости.
+        /// </summary>
         public int Height
         {
             get => _height;
@@ -113,6 +170,9 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает высоту проекционной плоскости.
+        /// </summary>
         public double Depth
         {
             get => _depth;
@@ -123,6 +183,9 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Возращает и задает логическое значение, отображается ли тестовая информация в снимке.
+        /// </summary>
         public bool IsTest { get; set; } = true;
 
         public Image Shot
@@ -201,15 +264,28 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Camera3D"/> по умолчанию.
+        /// </summary>
         public Camera3D()
         {
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Camera3D"/>.
+        /// </summary>
+        /// <param name="scene3D">Трёхмерная сцена.</param>
         public Camera3D(Scene3D scene3D)
         {
             Scene = scene3D;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Camera3D"/>.
+        /// </summary>
+        /// <param name="scene3D">Трёхмерная сцена.</param>
+        /// <param name="vector">Вектор направления камеры.</param>
+        /// <param name="point">Точка камеры.</param>
         public Camera3D(Scene3D scene3D, Vector vector, Point point)
         {
             Scene = scene3D;
@@ -217,6 +293,14 @@ namespace ClassificationApp.Models.Scenes
             Point = point;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Camera3D"/>.
+        /// </summary>
+        /// <param name="scene3D">Трёхмерная сцена.</param>
+        /// <param name="vector">Вектор направления камеры.</param>
+        /// <param name="point">Точка камеры.</param>
+        /// <param name="width">Длина проекционной плоскости.</param>
+        /// <param name="height">Высота проекционной плоскости.</param>
         public Camera3D(Scene3D scene3D, Vector vector, Point point, int width, int height)
         {
             Scene = scene3D;
@@ -226,6 +310,9 @@ namespace ClassificationApp.Models.Scenes
             Height = height;
         }
 
+        /// <summary>
+        /// Обновляет матрицу представления.
+        /// </summary>
         private void UpdateViewMatrix()
         {
             double[,] xRotationMatrix = new double[4, 4]
@@ -266,6 +353,9 @@ namespace ClassificationApp.Models.Scenes
             UpdateViewProjectionMatrix();
         }
 
+        /// <summary>
+        /// Обновляет матрицу проекции.
+        /// </summary>
         private void UpdateProjectionMatrix()
         {
             _projectionMatrix = new double[4, 4]
@@ -278,11 +368,23 @@ namespace ClassificationApp.Models.Scenes
             UpdateViewProjectionMatrix();
         }
 
+        /// <summary>
+        /// Обновляет матрицу представления-проекции.
+        /// </summary>
         private void UpdateViewProjectionMatrix()
         {
             _viewProjectionMatrix = MatrixManager.Multiply(_viewMatrix, _projectionMatrix);
         }
 
+        /// <summary>
+        /// Рисует строки на снимке.
+        /// </summary>
+        /// <param name="graphics">Объект графики.</param>
+        /// <param name="font">Шрифт.</param>
+        /// <param name="brush">Заливка для шрифта.</param>
+        /// <param name="x">Координата OX.</param>
+        /// <param name="y">Координата OY.</param>
+        /// <param name="strings">Строки.</param>
         private void DrawStrings(Graphics graphics, Font font, Brush brush, int x, int y, string[]
             strings)
         {
@@ -293,6 +395,18 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Рисует легенду на снимке.
+        /// </summary>
+        /// <param name="graphics">Объект графики.</param>
+        /// <param name="font">Шрифт.</param>
+        /// <param name="pen">Ручка для квадратов.</param>
+        /// <param name="fontBrush">Заливка для шрифта.</param>
+        /// <param name="x">Координата OX.</param>
+        /// <param name="y">Координата OY.</param>
+        /// <param name="width">Длина квадратов.</param>
+        /// <param name="colorBrushes">Цветные заливки квадратов.</param>
+        /// <param name="strings">Строки.</param>
         private void DrawLegend(Graphics graphics, Font font, Pen pen, Brush fontBrush, int x, int y, int
             width, Brush[] colorBrushes, string[] strings)
         {
@@ -305,6 +419,11 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Отображает точку.
+        /// </summary>
+        /// <param name="point">Точка.</param>
+        /// <returns>Отображение точки.</returns>
         public Point GetDisplay(Point point)
         {
             double[,] coordinates = MatrixManager.Multiply(_viewProjectionMatrix,
@@ -324,6 +443,11 @@ namespace ClassificationApp.Models.Scenes
             return new Point(point.Tag, new List<double>() { coordinates[0, 0], coordinates[1, 0] });
         }
 
+        /// <summary>
+        /// Отображает отрезок.
+        /// </summary>
+        /// <param name="lineSegment">Отрезок.</param>
+        /// <returns>Отображение отрезка.</returns>
         public LineSegment GetDisplay(LineSegment lineSegment)
         {
             Point begin = GetDisplay(lineSegment.Begin);
@@ -338,11 +462,20 @@ namespace ClassificationApp.Models.Scenes
             }
         }
 
+        /// <summary>
+        /// Отображает плоскость.
+        /// </summary>
+        /// <param name="plane">Плоскость.</param>
+        /// <returns>Полигон отображения плоскости.</returns>
         public Polygon GetDisplay(Plane plane)
         {
             return new Polygon(plane.Tag);
         }
 
+        /// <summary>
+        /// Поворачивает камеру по оси OX.
+        /// </summary>
+        /// <param name="angle">Угол поворота.</param>
         public void RotateOX(double angle)
         {
             Rotation = new List<double>()
@@ -353,6 +486,10 @@ namespace ClassificationApp.Models.Scenes
             };
         }
 
+        /// <summary>
+        /// Поворачивает камеру по оси OY.
+        /// </summary>
+        /// <param name="angle">Угол поворота.</param>
         public void RotateOY(double angle)
         {
             Rotation = new List<double>()
@@ -363,6 +500,10 @@ namespace ClassificationApp.Models.Scenes
             };
         }
 
+        /// <summary>
+        /// Поворачивает камеру по оси OZ.
+        /// </summary>
+        /// <param name="angle">Угол поворота.</param>
         public void RotateOZ(double angle)
         {
             Rotation = new List<double>()
@@ -373,6 +514,10 @@ namespace ClassificationApp.Models.Scenes
             };
         }
 
+        /// <summary>
+        /// Передвигает камеры по направлению камеры.
+        /// </summary>
+        /// <param name="stepsAmount">Количество шагов.</param>
         public void Go(double stepsAmount)
         {
             Point = Point.MoveByVector(stepsAmount * ShapeFactory.CreateOrtByAngles(Rotation));

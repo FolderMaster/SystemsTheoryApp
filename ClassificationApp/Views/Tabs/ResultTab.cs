@@ -9,12 +9,24 @@ using ClassificationApp.Views.Controls;
 
 namespace ClassificationApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для отображения результата классификации.
+    /// </summary>
     public partial class ResultTab : UserControl
     {
+        /// <summary>
+        /// Наименование классификатора.
+        /// </summary>
         private string _classifierName = null;
 
+        /// <summary>
+        /// Время процесса классифицирования.
+        /// </summary>
         private TimeSpan _time = new TimeSpan();
 
+        /// <summary>
+        /// Возращает и задаёт список стран.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Result
         {
@@ -22,6 +34,9 @@ namespace ClassificationApp.Views.Tabs
             set => CountryGridControl.Countries = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт трёхмерную сцену.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Scene3D Scene3D
         {
@@ -29,6 +44,9 @@ namespace ClassificationApp.Views.Tabs
             set => Scene3DDisplayControl.Scene3D = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт наименование классификатора.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ClassifierName
         {
@@ -40,6 +58,9 @@ namespace ClassificationApp.Views.Tabs
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт время процесса классифицирования.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan Time
         {
@@ -51,11 +72,17 @@ namespace ClassificationApp.Views.Tabs
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ResultTab"/> по умолчанию.
+        /// </summary>
         public ResultTab()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обновляет метку с временем и наименованием.
+        /// </summary>
         private void UpdateLabel()
         {
             ResultLabel.Text = $"The result was received by {ClassifierName} within {Time}";

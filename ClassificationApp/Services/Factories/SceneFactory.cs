@@ -6,8 +6,17 @@ using ClassificationApp.Services.Classification;
 
 namespace ClassificationApp.Services.Factories
 {
+    /// <summary>
+    /// Класс фабрики сцен, представляющий методы для создания сцен.
+    /// </summary>
     public static class SceneFactory
     {
+        /// <summary>
+        /// Создаёт трёхмерную сцену на основе классификатора.
+        /// </summary>
+        /// <param name="classifier">Классификатор.</param>
+        /// <returns>Трёхмерная сцена.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static Scene3D CreateScene3DByClassifier(IClassifier classifier)
         {
             Scene3D result = new Scene3D();

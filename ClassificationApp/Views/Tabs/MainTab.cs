@@ -12,8 +12,14 @@ using ClassificationApp.Views.Forms;
 
 namespace ClassificationApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для настройки классификации стран.
+    /// </summary>
     public partial class MainTab : UserControl
     {
+        /// <summary>
+        /// Список обучающих стран.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Education
         {
@@ -21,6 +27,9 @@ namespace ClassificationApp.Views.Tabs
             set => EductaionCountryGridControl.Countries = value;
         }
 
+        /// <summary>
+        /// Список стран теста.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Test
         {
@@ -28,6 +37,9 @@ namespace ClassificationApp.Views.Tabs
             set => TestCountryGridControl.Countries = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MainTab"/> по умолчанию.
+        /// </summary>
         public MainTab()
         {
             InitializeComponent();

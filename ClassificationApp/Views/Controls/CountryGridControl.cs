@@ -7,14 +7,29 @@ using ClassificationApp.Models.Countries;
 
 namespace ClassificationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для работы со списком стран.
+    /// </summary>
     public partial class CountryGridControl : UserControl
     {
+        /// <summary>
+        /// Список источника данных для <see cref="_bindingSource"/>.
+        /// </summary>
         private BindingList<Country> _bindingList = new BindingList<Country>();
 
+        /// <summary>
+        /// Источник данных для <see cref="DataGridView"/>.
+        /// </summary>
         private BindingSource _bindingSource = new BindingSource();
 
+        /// <summary>
+        /// Логическое значение, указывающее, что доступно редактирование.
+        /// </summary>
         private bool _isEditor = true;
 
+        /// <summary>
+        /// Возращает и задаёт список стран.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Countries
         {
@@ -26,6 +41,9 @@ namespace ClassificationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт логическое значение, указывающее, что доступно редактирование.
+        /// </summary>
         public bool IsEditor
         {
             get => _isEditor;
@@ -43,6 +61,9 @@ namespace ClassificationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="CountryGridControl"/> по умолчанию.
+        /// </summary>
         public CountryGridControl()
         {
             InitializeComponent();

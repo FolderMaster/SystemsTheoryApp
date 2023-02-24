@@ -2,6 +2,9 @@
 
 namespace ClassificationApp.Models.Scenes
 {
+    /// <summary>
+    /// Класс логарифмического масштабирования.
+    /// </summary>
     public class LogScale : IScale
     {
         public double Display(double value, double min, double max, double length) =>

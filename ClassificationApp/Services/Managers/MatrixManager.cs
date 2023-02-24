@@ -2,8 +2,17 @@
 
 namespace ClassificationApp.Services.Managers
 {
+    /// <summary>
+    /// Класс менеджера работы с матрицами, предоставляющий методы работы с ними.
+    /// </summary>
     public static class MatrixManager
     {
+        /// <summary>
+        /// Умножает матрицы.
+        /// </summary>
+        /// <param name="matrix1">Первая матрица.</param>
+        /// <param name="matrix2">Вторая матрица.</param>
+        /// <returns>Матрица - результат умножения матриц.</returns>
         public static double[,] Multiply(double[,] matrix1, double[,] matrix2)
         {
             ValueValidator.AssertMatricesAreCompatible(matrix1, nameof(matrix1), matrix2, 

@@ -1,28 +1,55 @@
 ﻿namespace ClassificationApp.Models.Scenes
 {
+    /// <summary>
+    /// Класс отрезка с начальной и конечной точками.
+    /// </summary>
     public class LineSegment : IShape
     {
         public object Tag { get; set; } = null;
 
+        /// <summary>
+        /// Возращает и задаёт точку начала.
+        /// </summary>
         public Point Begin { get; set; } = new Point();
 
+        /// <summary>
+        /// Возращает и задаёт точку конца.
+        /// </summary>
         public Point End { get; set; } = new Point();
 
+        /// <summary>
+        /// Создаёт экземлпяр класса <see cref="LineSegment"/> по умолчанию.
+        /// </summary>
         public LineSegment()
         {
         }
 
+        /// <summary>
+        /// Создаёт экземлпяр класса <see cref="LineSegment"/>.
+        /// </summary>
+        /// <param name="tag">Тег.</param>
         public LineSegment(object tag)
         {
             Tag = tag;
         }
 
+        /// <summary>
+        /// Создаёт экземлпяр класса <see cref="LineSegment"/>.
+        /// </summary>
+        /// <param name="begin">Точка начала.</param>
+        /// <param name="end">Точка конца.</param>
         public LineSegment(Point begin, Point end)
         {
             Begin = begin;
             End = end;
         }
 
+        /// <summary>
+        /// Создаёт экземлпяр класса <see cref="LineSegment"/>.
+        /// </summary>
+        /// <param name="tag">Тег.</param>
+        /// <param name="begin">Точка начала.</param>
+        /// <param name="end">Точка конца.</param>
         public LineSegment(object tag, Point begin, Point end)
         {
             Tag = tag;

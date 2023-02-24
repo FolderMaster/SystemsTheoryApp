@@ -7,22 +7,46 @@ using ClassificationApp.Services.Factories;
 
 namespace ClassificationApp.Services.Classification
 {
+    /// <summary>
+    /// Класс линейного классификатора с дополнительной информацией.
+    /// </summary>
     public class LinearClassifier : IClassifier
     {
         public bool IsEducated { get; private set; } = false;
 
+        /// <summary>
+        /// Вектор плоскости.
+        /// </summary>
         public Vector PlaneVector { get; private set; } = null;
 
+        /// <summary>
+        /// Точка плоскости.
+        /// </summary>
         public Point PlanePoint { get; private set; } = null;
 
+        /// <summary>
+        /// Центральная точка развитых стран.
+        /// </summary>
         public Point DevelopedMiddlePoint { get; private set; } = null;
 
+        /// <summary>
+        /// Центральная точка развивающихся стран.
+        /// </summary>
         public Point DevelopingMiddlePoint { get; private set; } = null;
 
+        /// <summary>
+        /// Список точек обучающих стран.
+        /// </summary>
         public List<Point> EduccationPoints { get; private set; } = new List<Point>();
 
+        /// <summary>
+        /// Список точек результирующих стран.
+        /// </summary>
         public List<Point> ResultPoints { get; private set; } = new List<Point>();
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="LinearClassifier"/> по умолчанию.
+        /// </summary>
         public LinearClassifier()
         {
         }

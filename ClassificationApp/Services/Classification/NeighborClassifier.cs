@@ -8,20 +8,39 @@ using ClassificationApp.Services.Factories;
 
 namespace ClassificationApp.Services.Classification
 {
+    /// <summary>
+    /// Класс классификатора метода ближайщего соседа с дополнительной информацией.
+    /// </summary>
     public class NeighborClassifier : IClassifier
     {
         public bool IsEducated { get; private set; } = false;
 
+        /// <summary>
+        /// Список точек обучающих стран.
+        /// </summary>
         public List<Point> EduccationPoints { get; private set; } = new List<Point>();
 
+        /// <summary>
+        /// Список точек результирующих стран.
+        /// </summary>
         public List<Point> ResultPoints { get; private set; } = new List<Point>();
 
+        /// <summary>
+        /// Возращает и задаёт количество соседей.
+        /// </summary>
         public int NeighborsCount { get; set; } = 1;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="NeighborClassifier"/> по умолчанию.
+        /// </summary>
         public NeighborClassifier()
         {
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="NeighborClassifier"/>.
+        /// </summary>
+        /// <param name="neighborsCount">Количество соседей.</param>
         public NeighborClassifier(int neighborsCount)
         {
             NeighborsCount = neighborsCount;
