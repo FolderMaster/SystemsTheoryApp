@@ -3,8 +3,18 @@ using System.Linq;
 
 namespace GeneralizationApp.Services.Validators
 {
+    /// <summary>
+    /// Класс валидации данных, предоставляющий методы.
+    /// </summary>
     public static class ValueValidator
     {
+        /// <summary>
+        /// Проверяет, не нулевое ли значение.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertIsNotNull<T>(T value, string name)
         {
             if (value == null)
@@ -13,6 +23,12 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не отрицательное ли значение.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertValueIsPositive(int value, string name)
         {
             if (value < 0)
@@ -21,6 +37,12 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не отрицательное ли значение.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertValueIsPositive(double value, string name)
         {
             if (value < 0)
@@ -29,6 +51,11 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не отрицательное ли значение у элемента матрицы.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименивание матрицы.</param>
         public static void AssertMatrixIsPositive(double[,] matrix, string name)
         {
             AssertIsNotNull(matrix, name);
@@ -43,6 +70,12 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, ранговая ли матрица.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименивание матрицы.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertMatrixIsRankingTable(int[,] matrix, string name)
         {
             AssertIsNotNull(matrix, name);
@@ -69,6 +102,12 @@ namespace GeneralizationApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, сумма элементов матрицы равна ли 1.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименивание матрицы.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertMatrixSumIsEqualToOne(double[] matrix, string name)
         {
             AssertIsNotNull(matrix, name);

@@ -4,8 +4,14 @@ using System.Windows.Forms;
 
 namespace GeneralizationApp.Views.Forms
 {
+    /// <summary>
+    /// Окно приложения для отображения результатов обобщения.
+    /// </summary>
     public partial class ResultForm : Form
     {
+        /// <summary>
+        /// Возращает и задаёт результат обобщения.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int[] Result
         {
@@ -13,6 +19,9 @@ namespace GeneralizationApp.Views.Forms
             set => ResultTab.Result = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт наименования метода обобщения.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string GeneralizerName
         {
@@ -20,6 +29,9 @@ namespace GeneralizationApp.Views.Forms
             set => ResultTab.GeneralizerName = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт время работы обобщения.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan Time
         {
@@ -27,6 +39,9 @@ namespace GeneralizationApp.Views.Forms
             set => ResultTab.Time = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ResultForm"/> по умолчанию.
+        /// </summary>
         public ResultForm()
         {
             InitializeComponent();

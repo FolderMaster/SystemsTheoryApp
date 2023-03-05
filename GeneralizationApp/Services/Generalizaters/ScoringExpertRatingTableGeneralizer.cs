@@ -4,8 +4,16 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Services.Generalizaters
 {
+    /// <summary>
+    /// Класс обобщения таблиц балльной оценки экспертов, предоставляющий метод.
+    /// </summary>
     public static class ScoringExpertRatingTableGeneralizer
     {
+        /// <summary>
+        /// Обобщает таблицу балльной оценки экспертов.
+        /// </summary>
+        /// <param name="table">Таблица балльной оценки экспертов.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] Generalize(ScoringExpertRatingTable table)
         {
             int expertCount = table.TableMatrix.GetLength(0);

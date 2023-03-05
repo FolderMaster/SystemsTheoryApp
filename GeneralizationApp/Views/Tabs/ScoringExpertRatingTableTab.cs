@@ -10,8 +10,14 @@ using GeneralizationApp.Views.Forms;
 
 namespace GeneralizationApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для работы с таблицей балльной оценки экспертов.
+    /// </summary>
     public partial class ScoringExpertRatingTableTab : UserControl
     {
+        /// <summary>
+        /// Возращает и задаёт таблицу балльной оценки экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ScoringExpertRatingTable ScoringExpertRatingTable
         {
@@ -19,6 +25,9 @@ namespace GeneralizationApp.Views.Tabs
             set => ScoringExpertRatingTableControl.ScoringExpertRatingTable = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ScoringExpertRatingTableTab"/> по умолчанию.
+        /// </summary>
         public ScoringExpertRatingTableTab()
         {
             InitializeComponent();

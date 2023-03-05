@@ -8,6 +8,9 @@ using GeneralizationApp.Views.Forms;
 
 namespace GeneralizationApp
 {
+    /// <summary>
+    /// Класс программы.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

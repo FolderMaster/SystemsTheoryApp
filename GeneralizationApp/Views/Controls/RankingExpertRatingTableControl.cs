@@ -6,12 +6,24 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования таблицы ранговой оценки экспертов.
+    /// </summary>
     public partial class RankingExpertRatingTableControl : UserControl
     {
+        /// <summary>
+        /// Количество экспертов.
+        /// </summary>
         private int _expertCount = 0;
 
+        /// <summary>
+        /// Количество альтернатив.
+        /// </summary>
         private int _objectCount = 0;
 
+        /// <summary>
+        /// Возращает и задаёт таблицу ранговой оценки экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RankingExpertRatingTable RankingExpertRatingTable
         {
@@ -29,6 +41,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int[,] TableMatrix
         {
@@ -41,6 +56,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ExpertCount
         {
@@ -52,6 +70,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ObjectCount
         {
@@ -63,6 +84,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="RankingExpertRatingTableControl"/> по умолчанию.
+        /// </summary>
         public RankingExpertRatingTableControl()
         {
             InitializeComponent();

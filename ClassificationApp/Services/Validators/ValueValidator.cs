@@ -12,7 +12,7 @@ namespace ClassificationApp.Services.Validators
         /// </summary>
         /// <typeparam name="T">Тип данных.</typeparam>
         /// <param name="value">Значение.</param>
-        /// <param name="name">Нименование значения.</param>
+        /// <param name="name">Наменование значения.</param>
         /// <exception cref="ArgumentException"></exception>
         public static void AssertIsNotNull<T>(T value, string name)
         {

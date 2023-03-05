@@ -4,8 +4,16 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Services.Generalizaters
 {
+    /// <summary>
+    /// Класс обобщения таблиц ранговой оценки экспертов, предоставляющий методы.
+    /// </summary>
     public static class RankingExpertRatingTableGeneralizer
     {
+        /// <summary>
+        /// Обобщает таблицу ранговой оценки экспертов методом ранжирования.
+        /// </summary>
+        /// <param name="table">Таблица ранговой оценки экспертов.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] RangingGeneralize(RankingExpertRatingTable table)
         {
             int expertCount = table.TableMatrix.GetLength(0);
@@ -25,6 +33,11 @@ namespace GeneralizationApp.Services.Generalizaters
             return valueSum.OrderBy(a => a.Item1).Select(a => a.Item2).ToArray();
         }
 
+        /// <summary>
+        /// Обобщает таблицу ранговой оценки экспертов методом парного сравнения.
+        /// </summary>
+        /// <param name="table">Таблица ранговой оценки экспертов.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] PairComparisonGeneralize(RankingExpertRatingTable table)
         {
             int expertCount = table.TableMatrix.GetLength(0);

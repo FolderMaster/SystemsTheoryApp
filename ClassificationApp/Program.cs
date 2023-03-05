@@ -9,7 +9,7 @@ using ClassificationApp.Views.Forms;
 namespace ClassificationApp
 {
     /// <summary>
-    /// Приложение.
+    /// Класс программы.
     /// </summary>
     internal static class Program
     {

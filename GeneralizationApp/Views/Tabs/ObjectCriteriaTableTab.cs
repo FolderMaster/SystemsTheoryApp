@@ -10,14 +10,24 @@ using System.Diagnostics;
 
 namespace GeneralizationApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для работы с таблицей оценок альтернатив.
+    /// </summary>
     public partial class ObjectCriteriaTableTab : UserControl
     {
+        /// <summary>
+        /// Возращает и задаёт таблицу оценок альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ObjectCriteriaTable ObjectCriteriaRollupTable
         {
             get => ObjectCriteriaTableControl.ObjectCriteriaRollupTable;
             set => ObjectCriteriaTableControl.ObjectCriteriaRollupTable = value;
         }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ObjectCriteriaTableTab"/> по умолчанию.
+        /// </summary>
         public ObjectCriteriaTableTab()
         {
             InitializeComponent();

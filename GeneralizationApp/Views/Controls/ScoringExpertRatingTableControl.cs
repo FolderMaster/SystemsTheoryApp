@@ -6,14 +6,29 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования таблицы балльной оценки экспертов.
+    /// </summary>
     public partial class ScoringExpertRatingTableControl : UserControl
     {
+        /// <summary>
+        /// Логическое значение, которое указывает, учитываются ли компетенции.
+        /// </summary>
         private bool _withCompetencies = false;
 
+        /// <summary>
+        /// Количество экспертов.
+        /// </summary>
         private int _expertCount = 0;
 
+        /// <summary>
+        /// Количество альтернатив.
+        /// </summary>
         private int _objectCount = 0;
 
+        /// <summary>
+        /// Возращает и задаёт таблицу балльной оценки экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ScoringExpertRatingTable ScoringExpertRatingTable
         {
@@ -43,6 +58,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] TableMatrix
         {
@@ -55,6 +73,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт логическое значение, которое указывает, учитываются ли компетенции.
+        /// </summary>
         public bool WithCompetencies
         {
             get => _withCompetencies;
@@ -72,13 +93,19 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт массив компетенций.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[] CompetenceMatrix
         {
-            get => CompetenceTableGridControl.TableMatrix;
-            set => CompetenceTableGridControl.TableMatrix = value;
+            get => CompetenceTableGridControl.DoubleArray;
+            set => CompetenceTableGridControl.DoubleArray = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ExpertCount
         {
@@ -90,6 +117,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ObjectCount
         {
@@ -101,6 +131,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ScoringExpertRatingTableControl"/> по умолчанию.
+        /// </summary>
         public ScoringExpertRatingTableControl()
         {
             InitializeComponent();

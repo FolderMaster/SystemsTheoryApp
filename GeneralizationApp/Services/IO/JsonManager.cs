@@ -4,7 +4,7 @@ using System.IO;
 namespace GeneralizationApp.Services.IO
 {
     /// <summary>
-    /// Предоставляет методы Json-сериализации и десериализации данных в файл.
+    /// Класс сериализации, представляющий методы Json-сериализации и десериализации данных в файл.
     /// </summary>
     public static class JsonManager
     {

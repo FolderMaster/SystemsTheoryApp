@@ -10,8 +10,14 @@ using GeneralizationApp.Views.Forms;
 
 namespace GeneralizationApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для работы с таблицей ранговой оценки экспертов.
+    /// </summary>
     public partial class RankingExpertRatingTableTab : UserControl
     {
+        /// <summary>
+        /// Возращает и задаёт таблицу ранговой оценки экспертов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RankingExpertRatingTable RankingExpertRatingTable
         {
@@ -19,6 +25,9 @@ namespace GeneralizationApp.Views.Tabs
             set => RankingExpertRatingTableControl.RankingExpertRatingTable = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="RankingExpertRatingTableTab"/> по умолчанию.
+        /// </summary>
         public RankingExpertRatingTableTab()
         {
             InitializeComponent();

@@ -7,16 +7,34 @@ using GeneralizationApp.Services.Validators;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования матрицы таблицы ранговых оценок.
+    /// </summary>
     public partial class RankingExpertRatingTableGridControl : UserControl
     {
+        /// <summary>
+        /// Количество экспертов.
+        /// </summary>
         private int _expertCount = 0;
 
+        /// <summary>
+        /// Количество альтернатив.
+        /// </summary>
         private int _objectCount = 0;
 
+        /// <summary>
+        /// Матрица таблицы.
+        /// </summary>
         private int[,] _tableMatrix = new int[0, 0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = CreateDataTable(0, 0);
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int[,] TableMatrix
         {
@@ -31,12 +49,22 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="RankingExpertRatingTableGridControl"/> по
+        /// умолчанию.
+        /// </summary>
         public RankingExpertRatingTableGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="expertCount">Количество экспертов.</param>
+        /// <param name="objectCount">Количество альтернатив.</param>
+        /// <returns>Таблица.</returns>
         private static DataTable CreateDataTable(int expertCount, int objectCount)
         {
             DataTable dataTable = new DataTable();
@@ -59,6 +87,9 @@ namespace GeneralizationApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int y = 0; y < _expertCount; ++y)

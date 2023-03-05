@@ -7,16 +7,34 @@ using GeneralizationApp.Services.Validators;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования матрицы таблицы балльных оценок.
+    /// </summary>
     public partial class ScoringTableGridControl : UserControl
     {
+        /// <summary>
+        /// Количество экспертов.
+        /// </summary>
         private int _expertCount = 0;
 
+        /// <summary>
+        /// Количество альтернатив.
+        /// </summary>
         private int _objectCount = 0;
 
+        /// <summary>
+        /// Матрица таблицы.
+        /// </summary>
         private double[,] _tableMatrix = new double[0, 0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = CreateDataTable(0, 0);
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] TableMatrix
         {
@@ -31,12 +49,21 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ScoringTableGridControl"/> по умолчанию.
+        /// </summary>
         public ScoringTableGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="expertCount">Количество экспертов.</param>
+        /// <param name="objectCount">Количество альтернатив.</param>
+        /// <returns>Таблица.</returns>
         private static DataTable CreateDataTable(int expertCount, int objectCount)
         {
             DataTable dataTable = new DataTable();
@@ -59,6 +86,9 @@ namespace GeneralizationApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int y = 0; y < _expertCount; ++y)

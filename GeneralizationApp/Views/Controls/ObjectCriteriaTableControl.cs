@@ -6,14 +6,29 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования таблицы оценок альтернатив.
+    /// </summary>
     public partial class ObjectCriteriaTableControl : UserControl
     {
+        /// <summary>
+        /// Логическое значение, которое указывает, учитываются ли весы.
+        /// </summary>
         private bool _withWeights = false;
 
+        /// <summary>
+        /// Количество альтернатив.
+        /// </summary>
         private int _objectCount = 0;
 
+        /// <summary>
+        /// Количество критериев.
+        /// </summary>
         private int _criteriaCount = 0;
 
+        /// <summary>
+        /// Возращает и задаёт таблицу оценок альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ObjectCriteriaTable ObjectCriteriaRollupTable
         {
@@ -45,6 +60,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] TableMatrix
         {
@@ -57,6 +75,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт логическое значение, которое указывает, учитываются ли весы.
+        /// </summary>
         public bool WithWeights
         {
             get => _withWeights;
@@ -74,20 +95,30 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт массив весов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[] WeightMatrix
         {
-            get => WeightTableGridControl.TableMatrix;
-            set => WeightTableGridControl.TableMatrix = value;
+            get => WeightTableGridControl.DoubleArray;
+            set => WeightTableGridControl.DoubleArray = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт массив логических значений, которые отвечают, убывающий параметр или
+        /// нет.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool[] DecreasingMatrix
         {
-            get => DecreasingCriteriaTableGridControl.TableMatrix;
-            set => DecreasingCriteriaTableGridControl.TableMatrix = value;
+            get => DecreasingCriteriaTableGridControl.BoolArray;
+            set => DecreasingCriteriaTableGridControl.BoolArray = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ObjectCount
         {
@@ -99,6 +130,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество критериев.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int CriteriaCount
         {
@@ -110,6 +144,9 @@ namespace GeneralizationApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ObjectCriteriaTableControl"/> по умолчанию.
+        /// </summary>
         public ObjectCriteriaTableControl()
         {
             InitializeComponent();

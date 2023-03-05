@@ -7,43 +7,69 @@ using GeneralizationApp.Services.Validators;
 
 namespace GeneralizationApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования массива вещественных чисел.
+    /// </summary>
     public partial class DoubleTableGridControl : UserControl
     {
+        /// <summary>
+        /// Количество вещественных чисел.
+        /// </summary>
         private int _count = 0;
 
-        private double[] _tableMatrix = new double[0];
+        /// <summary>
+        /// Массив вещественных чисел.
+        /// </summary>
+        private double[] _doubleArray = new double[0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = CreateDataTable(0);
 
+        /// <summary>
+        /// Возращает и задаёт массив вещественных чисел.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double[] TableMatrix
+        public double[] DoubleArray
         {
-            get => _tableMatrix;
+            get => _doubleArray;
             set
             {
-                _tableMatrix = value;
+                _doubleArray = value;
                 _count = value.Length;
                 _dataTable = CreateDataTable(_count);
                 UpdateDataTable();
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт логическое значение, указывающее, только ли для чтения элемент.
+        /// </summary>
         public bool IsReadOnly
         {
             get => DataGridView.ReadOnly;
             set => DataGridView.ReadOnly = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="DoubleTableGridControl"/> по умолчанию.
+        /// </summary>
         public DoubleTableGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
-        private static DataTable CreateDataTable(int weightCount)
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="count">Количество вещественных чисел.</param>
+        /// <returns>Таблица.</returns>
+        private static DataTable CreateDataTable(int count)
         {
             DataTable dataTable = new DataTable();
-            for (int n = 0; n < weightCount; ++n)
+            for (int n = 0; n < count; ++n)
             {
                 dataTable.Columns.Add($"{n + 1}", typeof(double));
             }
@@ -51,11 +77,14 @@ namespace GeneralizationApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int x = 0; x < _count; x++)
             {
-                _dataTable.Rows[0][x] = TableMatrix[x];
+                _dataTable.Rows[0][x] = DoubleArray[x];
             }
             DataGridView.DataSource = _dataTable;
         }
@@ -86,7 +115,7 @@ namespace GeneralizationApp.Views.Controls
             int columnIndex = e.ColumnIndex;
             object value = DataGridView[columnIndex, rowIndex].Value;
             string stringValue = value == null ? "" : value.ToString();
-            TableMatrix[columnIndex] = double.Parse(stringValue);
+            DoubleArray[columnIndex] = double.Parse(stringValue);
         }
     }
 }

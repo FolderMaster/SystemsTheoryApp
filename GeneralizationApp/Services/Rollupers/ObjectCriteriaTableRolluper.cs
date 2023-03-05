@@ -5,8 +5,16 @@ using GeneralizationApp.Models;
 
 namespace GeneralizationApp.Services.Rollupers
 {
+    /// <summary>
+    /// Класс свёртки таблиц оценок альтернатив, предоставляющий методы.
+    /// </summary>
     public static class ObjectCriteriaTableRolluper
     {
+        /// <summary>
+        /// Обобщает таблицу оценок альтернатив методом аддитивной свёртки.
+        /// </summary>
+        /// <param name="table">Таблица оценок альтернатив.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] AdditiveRollup(ObjectCriteriaTable table)
         {
             int objectCount = table.TableMatrix.GetLength(0);
@@ -41,6 +49,11 @@ namespace GeneralizationApp.Services.Rollupers
             return valueSum.OrderByDescending(a => a.Item1).Select(a => a.Item2).ToArray();
         }
 
+        /// <summary>
+        /// Обобщает таблицу оценок альтернатив методом мультипликативной свёртки.
+        /// </summary>
+        /// <param name="table">Таблица оценок альтернатив.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] MultiplicativeRollup(ObjectCriteriaTable table)
         {
             int objectCount = table.TableMatrix.GetLength(0);
@@ -77,6 +90,11 @@ namespace GeneralizationApp.Services.Rollupers
             return valueSum.OrderByDescending(a => a.Item1).Select(a => a.Item2).ToArray();
         }
 
+        /// <summary>
+        /// Обобщает таблицу оценок альтернатив методом идеальной точки.
+        /// </summary>
+        /// <param name="table">Таблица оценок альтернатив.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static int[] IdealPointRollup(ObjectCriteriaTable table)
         {
             int objectCount = table.TableMatrix.GetLength(0);
@@ -120,6 +138,12 @@ namespace GeneralizationApp.Services.Rollupers
             return valueSum.OrderBy(a => a.Item1).Select(a => a.Item2).ToArray();
         }
 
+        /// <summary>
+        /// Нормализует матрицу таблицы.
+        /// </summary>
+        /// <param name="table">Матрица таблицы.</param>
+        /// <param name="signs">Массив флагов.</param>
+        /// <returns>Нормализованная матрица таблицы.</returns>
         private static double[,] Normalize(double[,] table, bool[] signs)
         {
             int objectCount = table.GetLength(0);
@@ -149,6 +173,12 @@ namespace GeneralizationApp.Services.Rollupers
             return result;
         }
 
+        /// <summary>
+        /// Находит максимум в матрице таблицы по критерию.
+        /// </summary>
+        /// <param name="table">Матрица таблицы.</param>
+        /// <param name="criteriaIndex">Индекс критерия.</param>
+        /// <returns>Максимум по критерию.</returns>
         private static double GetMax(double[,] table, int criteriaIndex)
         {
             int objectCount = table.GetLength(0);
@@ -165,6 +195,12 @@ namespace GeneralizationApp.Services.Rollupers
             return max;
         }
 
+        /// <summary>
+        /// Находит минимум в матрице таблицы по критерию.
+        /// </summary>
+        /// <param name="table">Матрица таблицы.</param>
+        /// <param name="criteriaIndex">Индекс критерия.</param>
+        /// <returns>Минимум по критерию.</returns>
         private static double GetMin(double[,] table, int criteriaIndex)
         {
             int objectCount = table.GetLength(0);
