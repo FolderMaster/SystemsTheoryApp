@@ -9,8 +9,14 @@ using SystemAnalysisMethodApp.Services.Factories;
 
 namespace SystemAnalysisMethodApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для начальных настроек рассчёта МАИ.
+    /// </summary>
     public partial class MainTab : UserControl
     {
+        /// <summary>
+        /// Возращает и задаёт список стран.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Country> Countries
         {
@@ -18,6 +24,9 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             set => CountryGridControl.Countries = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт матрицу парных сравнений критериев.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PairComparisonMatrix PairComparisonMatrix
         {
@@ -25,6 +34,9 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             set => PairComparisonMatrixControl.PairComparisonMatrix = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MainTab"/> по умолчанию.
+        /// </summary>
         public MainTab()
         {
             InitializeComponent();

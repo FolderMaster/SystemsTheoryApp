@@ -2,6 +2,10 @@
 
 namespace GeneralizationApp.Services.App
 {
+    /// <summary>
+    /// Класс сессии с таблицей ранговой оценки экспертов, таблицей балльной оценки экспертов,
+    /// таблицей оценок альтернатив.
+    /// </summary>
     public class Session
     {
         /// <summary>

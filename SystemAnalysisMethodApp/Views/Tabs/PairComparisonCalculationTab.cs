@@ -6,8 +6,14 @@ using SystemAnalysisMethodApp.Models;
 
 namespace SystemAnalysisMethodApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для отображения рассчётов матрицы парных сравнений.
+    /// </summary>
     public partial class PairComparisonCalculationTab : UserControl
     {
+        /// <summary>
+        /// Задаёт матрицу парных сравнений.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PairComparisonMatrix PairComparisonMatrix
         {
@@ -19,11 +25,18 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="PairComparisonCalculationTab"/> по умолчанию.
+        /// </summary>
         public PairComparisonCalculationTab()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Изменить таблицу векторов.
+        /// </summary>
+        /// <param name="matrix">Матрица парных сравнений.</param>
         private void ChangeVectorGridView(PairComparisonMatrix matrix)
         {
             VectorGridView.Rows.Clear();
@@ -52,6 +65,11 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             ResizeVectorGridView();
         }
 
+        /// <summary>
+        /// Изменить таблицу суммы произведений суммы по столбцам и нормализованного собственного
+        /// вектора.
+        /// </summary>
+        /// <param name="matrix">Матрица парных сравнений.</param>
         private void ChangeLmaxGridView(PairComparisonMatrix matrix)
         {
             LmaxGridView.Rows.Clear();
@@ -74,6 +92,10 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             ResizeLmaxGridView();
         }
 
+        /// <summary>
+        /// Изменить текстовое поле отношения согласованности.
+        /// </summary>
+        /// <param name="matrix">Матрица парных сравнений.</param>
         private void ChangeConsistencyRelationTextBox(PairComparisonMatrix matrix)
         {
             ConsistencyRelationTextBox.Text = "ConsistencyRelation = (Lmax - Count) / (Count - 1" +
@@ -89,6 +111,9 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             }
         }
 
+        /// <summary>
+        /// Перестраивает представление таблицы векторов.
+        /// </summary>
         private void ResizeVectorGridView()
         {
             foreach (DataGridViewRow row in VectorGridView.Rows)
@@ -99,6 +124,10 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             }
         }
 
+        /// <summary>
+        /// Перестраивает представление таблицы суммы произведений суммы по столбцам и
+        /// нормализованного собственного вектора.
+        /// </summary>
         private void ResizeLmaxGridView()
         {
             foreach (DataGridViewRow row in LmaxGridView.Rows)

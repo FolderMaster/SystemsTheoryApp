@@ -2,8 +2,16 @@
 
 namespace SystemAnalysisMethodApp.Services.Rollupers
 {
+    /// <summary>
+    /// Класс свёртки таблиц оценок альтернатив, предоставляющий методы.
+    /// </summary>
     public static class ObjectCriteriaTableRolluper
     {
+        /// <summary>
+        /// Обобщает таблицу оценок альтернатив методом аддитивной свёртки.
+        /// </summary>
+        /// <param name="table">Таблица оценок альтернатив.</param>
+        /// <returns>Масссив с оценками.</returns>
         public static double[] AdditiveRollup(ObjectCriteriaTable table)
         {
             int objectCount = table.TableMatrix.GetLength(0);

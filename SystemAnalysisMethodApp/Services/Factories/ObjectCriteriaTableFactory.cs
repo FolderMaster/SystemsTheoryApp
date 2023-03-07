@@ -4,8 +4,17 @@ using SystemAnalysisMethodApp.Models;
 
 namespace SystemAnalysisMethodApp.Services.Factories
 {
+    /// <summary>
+    /// Класс фабрики таблиц оценок альтернатив, представляющий метод для создания таблиц оценок
+    /// альтернатив.
+    /// </summary>
     public static class ObjectCriteriaTableFactory
     {
+        /// <summary>
+        /// Создаёт таблицу оценок альтернатив на основе матриц парных сравнений.
+        /// </summary>
+        /// <param name="pairComparisonMatrices">Матрицы парных сравнений.</param>
+        /// <returns>Матрица парных сравнений на основе матриц парных сравнений.</returns>
         public static ObjectCriteriaTable CreateObjectCriteriaTableByPairComparisonMatrix
             (List<PairComparisonMatrix> pairComparisonMatrices)
         {

@@ -7,14 +7,29 @@ using SystemAnalysisMethodApp.Services.Validators;
 
 namespace SystemAnalysisMethodApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования матрицы парных сравнений.
+    /// </summary>
     public partial class PairComparisonMatrixGridControl : UserControl
     {
+        /// <summary>
+        /// Матрица.
+        /// </summary>
         private double[,] _matrix = new double[0, 0];
 
+        /// <summary>
+        /// Названия.
+        /// </summary>
         private string[] _names = new string[0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = CreateDataTable(0, new string[0]);
 
+        /// <summary>
+        /// Возращает и задаёт матрицу. Должна быть квадратной.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] Matrix
         {
@@ -30,6 +45,9 @@ namespace SystemAnalysisMethodApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт названия. Должна быть не пустой.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string[] Names
         {
@@ -44,20 +62,35 @@ namespace SystemAnalysisMethodApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт длину матрицу.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Count
         {
             get => _matrix.GetLength(0);
         }
 
+        /// <summary>
+        /// Обработчик события изменения матрицы.
+        /// </summary>
         public event EventHandler MatrixChanged;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="PairComparisonMatrixGridControl"/> по умолчанию.
+        /// </summary>
         public PairComparisonMatrixGridControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="count">Длина матрицы.</param>
+        /// <param name="names">Названия.</param>
+        /// <returns>Таблица с названиями.</returns>
         private static DataTable CreateDataTable(int count, string[] names)
         {
             DataTable dataTable = new DataTable();
@@ -84,6 +117,9 @@ namespace SystemAnalysisMethodApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int y = 0; y < Count; ++y)
@@ -96,6 +132,9 @@ namespace SystemAnalysisMethodApp.Views.Controls
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Перестраивает представление таблицы.
+        /// </summary>
         private void ResizeDataGridView()
         {
             foreach (DataGridViewRow row in DataGridView.Rows)
@@ -105,7 +144,8 @@ namespace SystemAnalysisMethodApp.Views.Controls
             }
         }
 
-        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs
+            e)
         {
             int rowIndex = e.RowIndex;
             int columnIndex = e.ColumnIndex;
@@ -114,8 +154,8 @@ namespace SystemAnalysisMethodApp.Views.Controls
                 try
                 {
                     double value = double.Parse((string)e.FormattedValue);
-                    ValueValidator.AssertIsElementOfPairComparisonMatrix(value, $"TableMatrix[{rowIndex}, " +
-                        $"{columnIndex - 1}]");
+                    ValueValidator.AssertIsElementOfPairComparisonMatrix(value, $"TableMatrix[" +
+                        $"{rowIndex}, {columnIndex - 1}]");
                     DataGridView[columnIndex, rowIndex].ErrorText = "";
                     DataGridView[columnIndex, rowIndex].Style.BackColor = 
                         ColorManager.CorrectColor;

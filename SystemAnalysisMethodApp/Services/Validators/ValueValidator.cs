@@ -3,8 +3,18 @@ using System.Linq;
 
 namespace SystemAnalysisMethodApp.Services.Validators
 {
+    /// <summary>
+    /// Класс валидации данных, предоставляющий методы.
+    /// </summary>
     public static class ValueValidator
     {
+        /// <summary>
+        /// Проверяет, не нулевое ли значение.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertIsNotNull<T>(T value, string name)
         {
             if (value == null)
@@ -13,6 +23,14 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не лежит ли значение за пределами диапазона.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="min">Минимум.</param>
+        /// <param name="max">Максимум.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertValueInRange(double value, double min, double max, string name)
         {
             if ((value < min) || (value > max))
@@ -21,6 +39,12 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не отрицательное ли значение.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наменование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertValueIsPositive(double value, string name)
         {
             if (value < 0)
@@ -29,6 +53,13 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, матрица квадратная ли.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименование матрицы.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertMatrixIsSquare<T>(T[,] matrix, string name)
         {
             AssertIsNotNull(matrix, name);
@@ -38,6 +69,11 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, не отрицательное ли значение у элемента матрицы.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименование матрицы.</param>
         public static void AssertMatrixIsPositive(double[,] matrix, string name)
         {
             AssertIsNotNull(matrix, name);
@@ -52,6 +88,15 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, длина матрицы равна ли значению.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="value">Значение.</param>
+        /// <param name="matrixName">Наименование матрицы.</param>
+        /// <param name="valueName">Наименование значения.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertMatrixLengthIsValue<T>(T[] matrix, int value, string matrixName, 
             string valueName)
         {
@@ -63,11 +108,21 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, является ли элемент к элементам матрицы парного сравнения.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="name">Наименвание значения.</param>
         public static void AssertIsElementOfPairComparisonMatrix(double value, string name)
         {
             AssertValueInRange(value, 0, 9, name);
         }
 
+        /// <summary>
+        /// Проверяет, является ли матрица матрицей парных сравнений.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименование матрицы.</param>
         public static void AssertMatrixIsPairComparison(double[,] matrix, string name)
         {
             AssertMatrixIsSquare(matrix, name);
@@ -81,6 +136,12 @@ namespace SystemAnalysisMethodApp.Services.Validators
             }
         }
 
+        /// <summary>
+        /// Проверяет, сумма элементов матрицы равна ли 1.
+        /// </summary>
+        /// <param name="matrix">Матрица.</param>
+        /// <param name="name">Наименивание матрицы.</param>
+        /// <exception cref="ArgumentException"></exception>
         public static void AssertMatrixSumIsEqualToOne(double[] matrix, string name)
         {
             AssertIsNotNull(matrix, name);

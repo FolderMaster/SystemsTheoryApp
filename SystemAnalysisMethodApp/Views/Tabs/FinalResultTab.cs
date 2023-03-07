@@ -8,19 +8,32 @@ using SystemAnalysisMethodApp.Services.Rollupers;
 
 namespace SystemAnalysisMethodApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для отображения финального результата.
+    /// </summary>
     public partial class FinalResultTab : UserControl
     {
+        /// <summary>
+        /// Задаёт таблицу оценок альтернатив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ObjectCriteriaTable ObjectCriteriaTable
         {
             set => CreateDataGridView(value);
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="FinalResultTab"/> по умолчанию.
+        /// </summary>
         public FinalResultTab()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="table">Таблица оценок альтернатив.</param>
         private void CreateDataGridView(ObjectCriteriaTable table)
         {
             DataGridView.Rows.Clear();
@@ -65,6 +78,9 @@ namespace SystemAnalysisMethodApp.Views.Tabs
             Label.Text = $"Best alternative: {table.AlternativeNames[maxGlobalPriorityIndex]}";
         }
 
+        /// <summary>
+        /// Перестраивает представление таблицы.
+        /// </summary>
         private void ResizeDataGridView()
         {
             foreach (DataGridViewRow row in DataGridView.Rows)

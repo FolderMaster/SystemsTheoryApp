@@ -6,10 +6,48 @@ using SystemAnalysisMethodApp.Models;
 
 namespace SystemAnalysisMethodApp.Services.Factories
 {
+    /// <summary>
+    /// Класс фабрики матриц парных сравнений, представляющий метод для создания матриц парных
+    /// сравнений.
+    /// </summary>
     public static class PairComparisonMatrixFactory
     {
-        public static PairComparisonMatrix CreatePairComparisonMatrixByCountryCriteria(List<Country> 
-            countries, int criteriaIndex)
+        /// <summary>
+        /// Преобразовывает в оценку числа.
+        /// </summary>
+        /// <param name="reduced">Уменьшаемое.</param>
+        /// <param name="subtracted">Вычитаемое.</param>
+        /// <param name="max">Максимум.</param>
+        /// <param name="min">Минимум.</param>
+        /// <returns>Оценка от 0 до 9.</returns>
+        private static double ConvertToImportance(double reduced, double subtracted, double max,
+            double min)
+        {
+            int result = (int)((reduced - subtracted) / (max - min) * 8);
+            return result >= 0 ? 1 / (double)(result + 1) : -result + 1;
+        }
+
+        /// <summary>
+        /// Преобразовывает в оценку характеристики.
+        /// </summary>
+        /// <param name="reduced">Уменьшаемое.</param>
+        /// <param name="subtracted">Вычитаемое.</param>
+        /// <returns>Оценка от 0 до 9.</returns>
+        private static double ConvertToImportance(СharacterType reduced, СharacterType subtracted)
+        {
+            int result = reduced - subtracted;
+            return result >= 0 ? result + 1 : 1 / (double)(-result + 1);
+        }
+
+        /// <summary>
+        /// Создаёт матрицу парных сравнений стран по критерию.
+        /// </summary>
+        /// <param name="countries">Список стран.</param>
+        /// <param name="criteriaIndex">Индекс критерия.</param>
+        /// <returns>Мтарица парных сравнений стран по критерию.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static PairComparisonMatrix CreatePairComparisonMatrixByCountryCriteria
+            (List<Country> countries, int criteriaIndex)
         {
             int count = countries.Count;
             double min = 0;
@@ -44,7 +82,7 @@ namespace SystemAnalysisMethodApp.Services.Factories
                         double importance;
                         switch(criteriaIndex)
                         {
-                            case 0: importance = ConvertToImportance(countries[y].AverageLivingCost, 
+                            case 0: importance = ConvertToImportance(countries[y].AverageLivingCost,
                                 countries[x].AverageLivingCost, max, min); break;
                             case 1: importance = ConvertToImportance(countries[y].TripPrice, 
                                 countries[x].TripPrice, max, min); break;
@@ -64,19 +102,6 @@ namespace SystemAnalysisMethodApp.Services.Factories
                 }
             }
             return result;
-        }
-
-        private static double ConvertToImportance(double reduced, double subtracted, double max,
-            double min)
-        {
-            int result = (int)((reduced - subtracted) / (max - min) * 8);
-            return result >= 0 ? 1 / (double)(result + 1) : -result + 1;
-        }
-
-        private static double ConvertToImportance(СharacterType reduced, СharacterType subtracted)
-        {
-            int result = reduced - subtracted;
-            return result >= 0 ? result + 1 : 1 / (double)(-result + 1);
         }
     }
 }

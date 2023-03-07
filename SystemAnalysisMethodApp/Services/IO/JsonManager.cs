@@ -3,8 +3,17 @@ using Newtonsoft.Json;
 
 namespace SystemAnalysisMethodApp.Services.IO
 {
+    /// <summary>
+    /// Класс сериализации, представляющий методы Json-сериализации и десериализации данных в файл.
+    /// </summary>
     public static class JsonManager
     {
+        /// <summary>
+        /// Загружает данные из Json-файла.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="filePath">Путь к файлу.</param>
+        /// <returns>Объект данных, хранящийся в файле.</returns>
         public static T Load<T>(string filePath)
         {
             using (FileStream fileReader = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Read))
@@ -17,6 +26,12 @@ namespace SystemAnalysisMethodApp.Services.IO
             }
         }
 
+        /// <summary>
+        /// Сохраняет данные в Json-файл.
+        /// </summary>
+        /// <typeparam name="T">Тип данных.</typeparam>
+        /// <param name="data">Данные.</param>
+        /// <param name="filePath">Путь к файлу.</param>
         public static void Save<T>(T data, string filePath)
         {
             using (FileStream fileWriter = new FileStream(filePath, FileMode.Create, FileAccess.Write))

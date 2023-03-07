@@ -7,10 +7,19 @@ using SystemAnalysisMethodApp.Views.Forms;
 
 namespace SystemAnalysisMethodApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для работы с матрицей парных сравнений.
+    /// </summary>
     public partial class PairComparisonMatrixControl : UserControl
     {
+        /// <summary>
+        /// Матрица парных сравнений.
+        /// </summary>
         private PairComparisonMatrix _pairComparisonMatrix = null;
         
+        /// <summary>
+        /// Возращает и задаёт матрицу парных сравнений.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PairComparisonMatrix PairComparisonMatrix
         {
@@ -23,14 +32,23 @@ namespace SystemAnalysisMethodApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает логическое значение, указывающее, нужен ли пересмотр.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsRevisionNeeded
         {
             get => _pairComparisonMatrix.IsRevisionNeeded;
         }
 
+        /// <summary>
+        /// Обработчик события изменения матрицы парных сравнений.
+        /// </summary>
         public event EventHandler PairComparisonMatrixChanged;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="PairComparisonMatrixControl"/> по умолчанию.
+        /// </summary>
         public PairComparisonMatrixControl()
         {
             InitializeComponent();

@@ -5,6 +5,9 @@ using SystemAnalysisMethodApp.Views.Forms;
 
 namespace SystemAnalysisMethodApp
 {
+    /// <summary>
+    /// Класс программы.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
