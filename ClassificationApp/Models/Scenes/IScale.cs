@@ -1,7 +1,7 @@
 ﻿namespace ClassificationApp.Models.Scenes
 {
     /// <summary>
-    /// Интерфейс масштабирования.
+    /// Интерфейс масштабирований, которые производят отображение координат.
     /// </summary>
     public interface IScale
     {

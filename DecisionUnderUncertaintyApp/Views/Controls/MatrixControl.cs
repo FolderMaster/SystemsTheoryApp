@@ -1,21 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования элементов матрицы.
+    /// </summary>
+    /// <typeparam name="T">Тип данных.</typeparam>
     public partial class MatrixControl<T> : UserControl
     {
+        /// <summary>
+        /// Количество столбцов.
+        /// </summary>
         private int _columnCount = 0;
 
+        /// <summary>
+        /// Количество строчек.
+        /// </summary>
         private int _rowCount = 0;
 
+        /// <summary>
+        /// Матрица.
+        /// </summary>
         private T[,] _matrix = new T[0, 0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = new DataTable();
 
+        /// <summary>
+        /// Возращает и задаёт матрицу.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T[,] Matrix
         {
@@ -34,14 +52,26 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения матрицы.
+        /// </summary>
         public event EventHandler MatrixChanged;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MatrixControl{T}"/> по умолчанию.
+        /// </summary>
         public MatrixControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="columnCount">Количество столбцов.</param>
+        /// <param name="rowCount">Количество строк.</param>
+        /// <returns>Таблица.</returns>
         private DataTable CreateDataTable(int columnCount, int rowCount)
         {
             DataTable dataTable = new DataTable();
@@ -66,6 +96,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int y = 0; y < _rowCount; ++y)
@@ -78,10 +111,24 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Производит валидацию значения.
+        /// </summary>
+        /// <param name="value">Значение.</param>
         protected virtual void Validate(T value) { }
 
+        /// <summary>
+        /// Производит преобразование текста в значение.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <returns>Значение.</returns>
         protected virtual T Parse(string text) => default;
 
+        /// <summary>
+        /// Создаёт массив заголовков строк.
+        /// </summary>
+        /// <param name="count">Количество.</param>
+        /// <returns>Массив заголовков строк.</returns>
         protected virtual string[] CreateRowStrings(int count)
         {
             string[] result = new string[count];
@@ -92,6 +139,11 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             return result;
         }
 
+        /// <summary>
+        /// Создаёт массив заголовков столбцов.
+        /// </summary>
+        /// <param name="count">Количество.</param>
+        /// <returns>Массив заголовков столбцов.</returns>
         protected virtual string[] CreateColumnStrings(int count)
         {
             string[] result = new string[count];
@@ -102,7 +154,8 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             return result;
         }
 
-        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs
+            e)
         {
             int rowIndex = e.RowIndex;
             int columnIndex = e.ColumnIndex;

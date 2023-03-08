@@ -3,7 +3,7 @@
 namespace ClassificationApp.Models.Scenes
 {
     /// <summary>
-    /// Интерфейс камеры.
+    /// Интерфейс камеры, которые возращают интерфейс сцены и снимок.
     /// </summary>
     public interface ICamera
     {

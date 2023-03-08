@@ -5,7 +5,8 @@ using ClassificationApp.Models.Countries;
 namespace ClassificationApp.Services.Classification
 {
     /// <summary>
-    /// Интерфейс классификатора.
+    /// Интерфейс классификаторов, у которых есть логическое значение, указывающее, что обучен ли
+    /// классификатор, которые обучают классификатор на примерах стран и классифицируют страны.
     /// </summary>
     public interface IClassifier
     {

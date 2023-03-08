@@ -4,6 +4,9 @@ using DecisionUnderUncertaintyApp.Services.Validators;
 
 namespace DecisionUnderUncertaintyApp.Services.DecissionSearchСriterion
 {
+    /// <summary>
+    /// Критерий нахождения наиболее оптимального решения Вальда.
+    /// </summary>
     public class WaldCriterion : IDecissionSearchСriterion
     {
         public double[] EvaluateDecissions(OptionsEnvironmentsTable table)

@@ -16,7 +16,8 @@ namespace SystemAnalysisMethodApp.Services.IO
         /// <returns>Объект данных, хранящийся в файле.</returns>
         public static T Load<T>(string filePath)
         {
-            using (FileStream fileReader = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Read))
+            using (FileStream fileReader = File.Open(filePath, FileMode.OpenOrCreate,
+                FileAccess.Read))
             {
                 byte[] arrayBytes = new byte[fileReader.Length];
                 fileReader.Read(arrayBytes, 0, arrayBytes.Length);
@@ -34,7 +35,8 @@ namespace SystemAnalysisMethodApp.Services.IO
         /// <param name="filePath">Путь к файлу.</param>
         public static void Save<T>(T data, string filePath)
         {
-            using (FileStream fileWriter = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            using (FileStream fileWriter = new FileStream(filePath, FileMode.Create,
+                FileAccess.Write))
             {
                 string text = JsonConvert.SerializeObject(data);
 

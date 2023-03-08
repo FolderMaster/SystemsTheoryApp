@@ -6,15 +6,30 @@ using DecisionUnderUncertaintyApp.Models;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования таблицы вариантов и состояний среды.
+    /// </summary>
     public partial class OptionsEnvironmentsTableControl : UserControl
     {
+        /// <summary>
+        /// Таблица вариантов и состояний среды.
+        /// </summary>
         private OptionsEnvironmentsTable _optionsEnvironmentsTable = new
             OptionsEnvironmentsTable();
 
+        /// <summary>
+        /// Количество вариантов.
+        /// </summary>
         private int _optionCount = 0;
 
+        /// <summary>
+        /// Количество состояний среды.
+        /// </summary>
         private int _environmentCount = 0;
 
+        /// <summary>
+        /// Возращает и задаёт таблицу вариантов и состояний среды.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public OptionsEnvironmentsTable OptionsEnvironmentsTable
         {
@@ -35,6 +50,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт матрицу таблицы.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double[,] TableMatrix
         {
@@ -47,6 +65,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество вариантов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int OptionCount
         {
@@ -58,6 +79,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возращает и задаёт количество состояний среды.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EnvironmentCount
         {
@@ -69,6 +93,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="OptionsEnvironmentsTableControl"/> по умолчанию.
+        /// </summary>
         public OptionsEnvironmentsTableControl()
         {
             InitializeComponent();

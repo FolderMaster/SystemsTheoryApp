@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using DecisionUnderUncertaintyApp.Models;
@@ -14,8 +8,14 @@ using DecisionUnderUncertaintyApp.Views.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Tabs
 {
+    /// <summary>
+    /// Элемент управления для работы с таблицей вариантов и состояний среды.
+    /// </summary>
     public partial class MainTab : UserControl
     {
+        /// <summary>
+        /// Возращает и задаёт таблицу вариантов и состояний среды.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public OptionsEnvironmentsTable OptionsEnvironmentsTable
         {
@@ -23,6 +23,9 @@ namespace DecisionUnderUncertaintyApp.Views.Tabs
             set => OptionsEnvironmentsTableControl.OptionsEnvironmentsTable = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MainTab"/> по умолчанию.
+        /// </summary>
         public MainTab()
         {
             InitializeComponent();

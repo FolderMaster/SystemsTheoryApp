@@ -5,14 +5,30 @@ using System.Windows.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для выбора элемента в списке.
+    /// </summary>
+    /// <typeparam name="T">Тип данных.</typeparam>
     public partial class SelectorControl<T> : UserControl
     {
+        /// <summary>
+        /// Источник данных для <see cref="ComboBox"/>.
+        /// </summary>
         private BindingSource _bindingSource = new BindingSource();
 
+        /// <summary>
+        /// Список элементов.
+        /// </summary>
         private List<T> _items = new List<T>();
 
+        /// <summary>
+        /// Выбранный элемент.
+        /// </summary>
         private T _selectedItem = default;
 
+        /// <summary>
+        /// Возращает и задаёт список элементов.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<T> Items
         {
@@ -29,6 +45,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Возраащет и задаёт выбранный элемент.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T SelectedItem
         {
@@ -43,8 +62,14 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения выбранного элемента.
+        /// </summary>
         public event EventHandler SelectedItemChanged;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="SelectorControl{T}"/> по умолчанию.
+        /// </summary>
         public SelectorControl()
         {
             InitializeComponent();

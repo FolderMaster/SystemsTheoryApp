@@ -3,7 +3,9 @@
 namespace ClassificationApp.Models.Scenes
 {
     /// <summary>
-    /// Интерфейс графика.
+    /// Интерфейс графиков, у которых есть оси, фигуры, отображения фигур, камера по умолчанию,
+    /// значение по умолчанию, которые находят минимальные и максимальные координаты на оси и
+    /// выполняют отображение фигур по умолчанию.
     /// </summary>
     public interface IGraph
     {
@@ -23,7 +25,7 @@ namespace ClassificationApp.Models.Scenes
         List<IShape> Displays { get; }
 
         /// <summary>
-        /// Возращает rкамеру по умолчанию.
+        /// Возращает камеру по умолчанию.
         /// </summary>
         ICamera DefaultCamera { get; }
 

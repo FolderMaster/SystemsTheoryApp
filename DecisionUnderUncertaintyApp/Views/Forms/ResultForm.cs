@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Forms
 {
+    /// <summary>
+    /// Окно приложения для отображения результата.
+    /// </summary>
     public partial class ResultForm : Form
     {
+        /// <summary>
+        /// Задаёт массив решений.
+        /// </summary>
         public double[] Array
         {
             set => ResultTab.Array = value;
         }
 
+        /// <summary>
+        /// Задаёт индекс оптимального решения.
+        /// </summary>
         public int Index
         {
             set => ResultTab.Index = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ResultForm"/>.
+        /// </summary>
+        /// <param name="array">Массив  решений.</param>
+        /// <param name="index">Индекс оптимального решения.</param>
         public ResultForm(double[] array, int index)
         {
             InitializeComponent();

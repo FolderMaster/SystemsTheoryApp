@@ -5,14 +5,30 @@ using System.Windows.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для редактирования элементов массива.
+    /// </summary>
+    /// <typeparam name="T">Тип данных.</typeparam>
     public partial class ArrayControl<T> : UserControl
     {
+        /// <summary>
+        /// Количество.
+        /// </summary>
         private int _count = 0;
 
+        /// <summary>
+        /// Массив.
+        /// </summary>
         private T[] _array = new T[0];
 
+        /// <summary>
+        /// Таблица.
+        /// </summary>
         private DataTable _dataTable = new DataTable();
 
+        /// <summary>
+        /// Возращает и задаёт массив.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T[] Array
         {
@@ -30,21 +46,35 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения массива.
+        /// </summary>
         public event EventHandler ArrayChanged;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool ÍsReadOnly
+        /// <summary>
+        /// Возращает и задаёт логическое значение, указывающее, только ли для чтения элемент
+        /// управления.
+        /// </summary>
+        public bool IsReadOnly
         {
             get => DataGridView.ReadOnly;
             set => DataGridView.ReadOnly = value;
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="ArrayControl{T}"/> по умолчанию.
+        /// </summary>
         public ArrayControl()
         {
             InitializeComponent();
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Создаёт таблицу.
+        /// </summary>
+        /// <param name="count">Количество.</param>
+        /// <returns>Таблица.</returns>
         private DataTable CreateDataTable(int count)
         {
             DataTable dataTable = new DataTable();
@@ -59,6 +89,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             return dataTable;
         }
 
+        /// <summary>
+        /// Обновляет таблицу.
+        /// </summary>
         private void UpdateDataTable()
         {
             for (int x = 0; x < _count; ++x)
@@ -68,10 +101,24 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             DataGridView.DataSource = _dataTable;
         }
 
+        /// <summary>
+        /// Производит валидацию значения.
+        /// </summary>
+        /// <param name="value">Значение.</param>
         protected virtual void Validate(T value) { }
 
+        /// <summary>
+        /// Производит преобразование текста в значение.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <returns>Значение.</returns>
         protected virtual T Parse(string text) => default;
 
+        /// <summary>
+        /// Создаёт массив заголовков столбцов.
+        /// </summary>
+        /// <param name="count">Количество.</param>
+        /// <returns>Массив заголовков столбцов.</returns>
         protected virtual string[] CreateColumnStrings(int count)
         {
             string[] result = new string[count];
@@ -82,6 +129,10 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             return result;
         }
 
+        /// <summary>
+        /// Устанавливает выбор на индексе.
+        /// </summary>
+        /// <param name="index">Индекс.</param>
         public void SetSelectedIndex(int index)
         {
             DataGridView.Columns[index].DefaultCellStyle.BackColor = ColorManager.AnswerColor;

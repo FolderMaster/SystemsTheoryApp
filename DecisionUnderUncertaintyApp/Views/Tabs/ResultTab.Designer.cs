@@ -34,6 +34,7 @@
             // DoubleArrayControl
             // 
             this.DoubleArrayControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DoubleArrayControl.IsReadOnly = true;
             this.DoubleArrayControl.Location = new System.Drawing.Point(0, 0);
             this.DoubleArrayControl.Name = "DoubleArrayControl";
             this.DoubleArrayControl.Size = new System.Drawing.Size(610, 304);

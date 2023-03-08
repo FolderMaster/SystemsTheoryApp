@@ -8,6 +8,9 @@ using DecisionUnderUncertaintyApp.Views.Forms;
 
 namespace DecisionUnderUncertaintyApp
 {
+    /// <summary>
+    /// Класс программы.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

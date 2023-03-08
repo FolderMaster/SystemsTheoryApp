@@ -4,10 +4,19 @@ using DecisionUnderUncertaintyApp.Services.Validators;
 
 namespace DecisionUnderUncertaintyApp.Services.DecissionSearchСriterion
 {
+    /// <summary>
+    /// Критерий нахождения наиболее оптимального решения Гурвица.
+    /// </summary>
     public class HurwitzCriterion : IDecissionSearchСriterion
     {
+        /// <summary>
+        /// Коэффициент.
+        /// </summary>
         private double _coefficient;
 
+        /// <summary>
+        /// Возаращает и задаёт коэффициент. Должен быть от 0 до 1.
+        /// </summary>
         public double Coefficient
         {
             get => _coefficient;
@@ -18,6 +27,10 @@ namespace DecisionUnderUncertaintyApp.Services.DecissionSearchСriterion
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="HurwitzCriterion"/>.
+        /// </summary>
+        /// <param name="coefficient">Коэффициент.</param>
         public HurwitzCriterion(double coefficient)
         {
             Coefficient = coefficient;

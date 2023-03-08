@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using DecisionUnderUncertaintyApp.Services.App;
@@ -13,12 +6,24 @@ using DecisionUnderUncertaintyApp.Services.IO;
 
 namespace DecisionUnderUncertaintyApp.Views.Forms
 {
+    /// <summary>
+    /// Основное окно приложения.
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Настройки.
+        /// </summary>
         private Settings _settings = new Settings();
 
+        /// <summary>
+        /// Сессия.
+        /// </summary>
         private Session _session = new Session();
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="MainForm"/> по умолчанию.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();

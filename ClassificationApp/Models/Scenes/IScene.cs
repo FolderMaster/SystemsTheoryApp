@@ -3,7 +3,7 @@
 namespace ClassificationApp.Models.Scenes
 {
     /// <summary>
-    /// Интерфейс сцены.
+    /// Интерфейс сцен, У которых есть интерфейс графика, фигуры, интерфейс камеры.
     /// </summary>
     public interface IScene
     {

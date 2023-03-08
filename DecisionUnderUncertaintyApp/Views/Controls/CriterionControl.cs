@@ -7,12 +7,24 @@ using DecisionUnderUncertaintyApp.Services.Validators;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для выбора критерия нахождения оптимального решения.
+    /// </summary>
     public partial class CriterionControl : UserControl
     {
+        /// <summary>
+        /// Интерфейс критерия нахождения оптимального решения.
+        /// </summary>
         private IDecissionSearchСriterion _iDecissionSearchСriterion = null;
 
+        /// <summary>
+        /// Коэффициент Гурвица.
+        /// </summary>
         private double _coefficient;
 
+        /// <summary>
+        /// Возращает и задаёт интерфейс критерия нахождения оптимального решения.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IDecissionSearchСriterion IDecissionSearchСriterion
         {
@@ -20,6 +32,9 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             private set => _iDecissionSearchСriterion = value;
         }
 
+        /// <summary>
+        /// Возращает и задаёт коэффициент Гурвица. Должен быть от 0 до 1.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         private double Coefficient
         {
@@ -31,14 +46,23 @@ namespace DecisionUnderUncertaintyApp.Views.Controls
             }
         }
 
+        /// <summary>
+        /// Задаёт выбранного типа критерия нахождения оптимального решения.
+        /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         private СriterionType СriterionType
         {
             get => CriterionTypeSelectorControl.SelectedItem;
         }
 
+        /// <summary>
+        /// Обработчик событий нажатия кнопки.
+        /// </summary>
         public event EventHandler ButtonClicked;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="CriterionControl"/> по умолчанию.
+        /// </summary>
         public CriterionControl()
         {
             InitializeComponent();

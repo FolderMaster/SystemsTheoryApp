@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DecisionUnderUncertaintyApp.Views.Controls
 {
+    /// <summary>
+    /// Элемент управления для выбора типа критерия нахождения оптимального решения.
+    /// </summary>
     public partial class СriterionTypeSelectorControl : SelectorControl<СriterionType>
     {
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="СriterionTypeSelectorControl"/> по умолчанию.
+        /// </summary>
         public СriterionTypeSelectorControl()
         {
             InitializeComponent();

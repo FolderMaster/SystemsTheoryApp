@@ -1,7 +1,8 @@
 ﻿namespace ClassificationApp.Models.Scenes
 {
     /// <summary>
-    /// Интерфейс фигуры.
+    /// Интерфейс фигур, у которых есть тег, которые отображают фигуру в графике, находят
+    /// минимальную и максимальную координату в оси.
     /// </summary>
     public interface IShape
     {
